@@ -33,8 +33,7 @@
         "map": [
           ["@/components", "./src/components"],
           ["@/styles", "./src/styles"],
-          ["@/assets", "./src/assets"],
-          ["@/icons", "./src/assets/icons"]
+          ["@/assets", "./src/assets"]
         ],
         "extensions": [".ts", ".js", ".jsx", ".tsx", ".json"]
       }
