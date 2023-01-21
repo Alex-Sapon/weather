@@ -29,5 +29,6 @@ export const CardsItems = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 30px;
   border-radius: 20px;
-  box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
+  background-color: ${props => props.theme.color.backgroundSecondary};
+  box-shadow: ${props => props.theme.boxShadow};
 `;

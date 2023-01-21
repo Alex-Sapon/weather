@@ -4,7 +4,9 @@ export const LeftSideInfoContainer = styled.div`
   height: 300px;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
+  color: ${props => props.theme.color.textSecondary};
+  background-color: ${props => props.theme.color.backgroundSecondary};
+  box-shadow: ${props => props.theme.boxShadow};
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -20,7 +22,7 @@ export const LeftSideInfoContainer = styled.div`
 export const LeftSideTemperature = styled.div`
   font-weight: 500;
   font-size: 96px;
-  color: #4793FF;
+  color: ${props => props.theme.color.textTertiary};
   grid-area: 1 / 1 / 2 / 2;
 
   @media (max-width: 479.98px) {
@@ -29,6 +31,7 @@ export const LeftSideTemperature = styled.div`
 `;
 
 export const LeftSideDay = styled.div`
+  color: ${props => props.theme.color.textPrimary};
   font-weight: 500;
   font-size: 32px;
   grid-area: 2 / 1 / 3 / 2;
@@ -52,7 +55,6 @@ export const LeftSideWeather = styled.img`
 export const LeftSideTime = styled.div`
   font-weight: 400;
   font-size: 22px;
-  color: #939CB0;
   grid-area: 3 / 1 / 4 / 3;
 
   @media (max-width: 479.98px) {
@@ -63,7 +65,6 @@ export const LeftSideTime = styled.div`
 export const LeftSideCity = styled.div`
   font-weight: 400;
   font-size: 22px;
-  color: #939CB0;
   grid-area: 4 / 1 / 5 / 3;
 
   @media (max-width: 479.98px) {

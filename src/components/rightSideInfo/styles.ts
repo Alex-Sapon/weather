@@ -4,7 +4,8 @@ export const RightSideInfoContainer = styled.div`
   height: 300px;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
+  background-color: ${props => props.theme.color.backgroundSecondary};
+  box-shadow: ${props => props.theme.boxShadow};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -31,12 +32,12 @@ export const RightSideLogo = styled.img`
 `;
 
 export const RightSideTitle = styled.span`
-  color: #939CB0;
+  color: ${props => props.theme.color.textSecondary};
   display: inline-block;
 `;
 
 export const RightSideDescription= styled.div`
-  color: #000;
   display: flex;
   align-items: center;
+  color: ${props => props.theme.color.textPrimary};
 `;

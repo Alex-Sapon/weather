@@ -10,5 +10,6 @@ export const GlobalStyles = createGlobalStyle`
   
   body {
     font-family: 'Montserrat', sans-serif;
+    background-color: ${props => props.theme.color.backgroundPrimary};
   }
 `;

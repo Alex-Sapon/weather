@@ -6,19 +6,19 @@ export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(6, auto-fill);
   row-gap: 5px;
-  background-color: rgba(71, 147, 255, 0.2);
+  color: ${props => props.theme.color.textPrimary};
+  background-color: ${props => props.theme.color.backgroundTertiary};
   border-radius: 10px;
 `;
 
 export const CardTextBold = styled.div`
   font-weight: 500;
   font-size: 18px;
-  color: #000;
 `;
 
 export const CardTextLight = styled.div`
   font-size: 14px;
-  color: #939CB0;
+  color: ${props => props.theme.color.textSecondary};
 `;
 
 export const CardImage = styled.img`

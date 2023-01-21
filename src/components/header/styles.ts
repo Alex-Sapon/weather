@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-  background-color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,8 +28,8 @@ export const ThemeButton = styled.img`
 `;
 
 export const Input = styled.input`
-  background-color: #4793FF33;
-  color: #000;
+  color: ${props => props.theme.color.textPrimary};
+  background-color: ${props => props.theme.color.backgroundTertiary};
   border-radius: 10px;
   border: none;
   width: 195px;
