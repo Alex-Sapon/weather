@@ -6,12 +6,16 @@ export const HeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 50px;
+
+  @media (max-width: 767.98px) {
+    margin-bottom: 30px;
+  }
 `;
 
 export const Logo = styled.img`
   width: 65px;
   height: 65px;
-  margin-right: 40px;
+  margin-right: 15px;
 `;
 
 export const Control = styled.div`

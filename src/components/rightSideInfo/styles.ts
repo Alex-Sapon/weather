@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const RightSideInfoContainer = styled.div`
-  width: 750px;
   height: 300px;
   padding: 30px;
   border-radius: 20px;
@@ -9,19 +8,23 @@ export const RightSideInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 479.98px) {
+    padding: 20px;
+  }
 `;
 
 export const RightSideRow = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 50px 120px 1fr;
+  gap: 10px;
   align-items: center;
   font-size: 16px;
 `;
 
 export const RightSideLogo = styled.img`
-  width: 45px;
   height: 45px;
   background: #fff;
-  margin-right: 20px;
   padding: 7px;
   border-radius: 100%;
   box-shadow: 1px 4px 10px -1px rgba(71, 147, 255, 0.2);
@@ -30,8 +33,6 @@ export const RightSideLogo = styled.img`
 export const RightSideTitle = styled.span`
   color: #939CB0;
   display: inline-block;
-  width: 100px;
-  margin-right: 35px;
 `;
 
 export const RightSideDescription= styled.div`

@@ -22,5 +22,5 @@ export const CardTextLight = styled.div`
 `;
 
 export const CardImage = styled.img`
-  
+  margin: 8px 0;
 `;

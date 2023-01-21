@@ -11,14 +11,22 @@ export const CardsContainer = styled.div``;
 export const CardsControlLeft = styled.div`
   display: grid;
   grid-template-columns: repeat(3, auto);
-  column-gap: 20px;
-  margin-right: 30px;
+  gap: 20px;
+  margin-right: 20px;
+
+  @media (max-width: 767.98px) {
+    grid-template-columns: repeat(2, auto);
+  }
+
+  @media (max-width: 479.98px) {
+    grid-template-columns: repeat(1, auto);
+  }
 `;
 
 export const CardsItems = styled.div`
   padding: 20px;
   display: grid;
-  grid-template-columns: repeat(6, minmax(150px, 250px));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 30px;
   border-radius: 20px;
   box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
