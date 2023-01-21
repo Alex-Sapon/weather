@@ -2,4 +2,5 @@ import styled from 'styled-components';
 
 export const InfoContainer = styled.div`
   display: flex;
+  margin-bottom: 50px;
 `;

@@ -5,14 +5,20 @@ import Press from '@/assets/icons/pressure.svg';
 import Precipitation from '@/assets/icons/precipitation.svg';
 import Wind from '@/assets/icons/wind.svg';
 
-import { RightSideInfoContainer, RightSideTitle, RightSideLogo, RightSideRow, RightSideDescription } from './styles';
+import {
+  RightSideInfoContainer,
+  RightSideTitle,
+  RightSideLogo,
+  RightSideRow,
+  RightSideDescription
+} from './styles';
 
 export const RightSideInfo = () => (
   <RightSideInfoContainer>
     <RightSideRow>
       <RightSideLogo src={Temp} />
       <RightSideTitle>Температура</RightSideTitle>
-      <RightSideDescription>20° - ощущается как 17°</RightSideDescription>
+      <RightSideDescription>20&deg; - ощущается как 17&deg;</RightSideDescription>
     </RightSideRow>
 
     <RightSideRow>

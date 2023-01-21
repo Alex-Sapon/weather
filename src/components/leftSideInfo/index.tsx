@@ -12,7 +12,7 @@ import {
 
 export const LeftSideInfo = () => (
   <LeftSideInfoContainer>
-    <LeftSideTemperature>20°</LeftSideTemperature>
+    <LeftSideTemperature>20&deg;</LeftSideTemperature>
     <LeftSideDay>Сегодня</LeftSideDay>
     <LeftSideWeather src={Sun}/>
     <LeftSideTime>Время: 21:54</LeftSideTime>

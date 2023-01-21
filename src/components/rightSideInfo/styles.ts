@@ -35,7 +35,7 @@ export const RightSideTitle = styled.span`
 `;
 
 export const RightSideDescription= styled.div`
-  color: #000000;
+  color: #000;
   display: flex;
   align-items: center;
 `;
