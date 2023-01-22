@@ -1,7 +1,8 @@
 // ----- color palette -----
 const color = {
   white: '#ffffff',
-  blackDark: '#000000',
+  whiteSmoke: '#d3e6ed61',
+  blackDark: '#1A1A1C',
   blackLight: '#2E3035',
   greyDark: '#4F4F4F',
   greyLight: '#939CB0',
@@ -42,7 +43,7 @@ const color = {
 // ----- boxShadow -----
 export const boxShadow = {
   light: '2px 5px 25px -3px rgba(180, 180, 180, 0.25)',
-  dark: '2px 5px 25px -3px rgba(180, 180, 180, 0.25)',
+  dark: '2px 5px 20px -5px rgba(180, 180, 180, 0.25)',
 };
 
 // ----- animation -----
@@ -53,7 +54,7 @@ export const boxShadow = {
 
 const lightTheme = {
   color: {
-    backgroundPrimary: color.white,
+    backgroundPrimary: color.whiteSmoke,
     backgroundSecondary: color.white,
     backgroundTertiary: color.blueDark,
     textPrimary: color.blackDark,
