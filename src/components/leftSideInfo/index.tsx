@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Sun from '@/assets/icons/sun.svg';
 import {
   LeftSideInfoContainer,
   LeftSideWeather,
@@ -9,6 +8,8 @@ import {
   LeftSideTime,
   LeftSideCity,
 } from './styles';
+
+import Sun from '@/assets/icons/sun.svg';
 
 export const LeftSideInfo = () => (
   <LeftSideInfoContainer>

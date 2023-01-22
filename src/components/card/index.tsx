@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { CardContainer, CardTextBold, CardImage, CardTextLight } from './styles';
 
 type CardProps = {

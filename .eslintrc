@@ -18,6 +18,31 @@
     "indent": ["error", 2],
     "no-console": "error",
     "import/prefer-default-export": "off",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "pathGroupsExcludedImportTypes": ["react"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "groups": [
+          "builtin",
+          "external",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ]
+      }
+    ],
     "react/function-component-definition": [
       2,
       { "namedComponents": "arrow-function" }
@@ -33,7 +58,9 @@
         "map": [
           ["@/components", "./src/components"],
           ["@/styles", "./src/styles"],
-          ["@/assets", "./src/assets"]
+          ["@/assets", "./src/assets"],
+          ["@/store", "./src/store"],
+          ["@/sagas", "./src/sagas"]
         ],
         "extensions": [".ts", ".js", ".jsx", ".tsx", ".json"]
       }

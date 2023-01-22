@@ -77,7 +77,7 @@ const darkTheme = {
   boxShadow: boxShadow.dark,
 };
 
-export const theme = {
+export const theme: {[key: string]: any} = {
   light: lightTheme,
   dark: darkTheme,
 };

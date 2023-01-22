@@ -1,10 +1,5 @@
 import React from 'react';
 
-import Temp from '@/assets/icons/temp.svg';
-import Press from '@/assets/icons/pressure.svg';
-import Precipitation from '@/assets/icons/precipitation.svg';
-import Wind from '@/assets/icons/wind.svg';
-
 import {
   RightSideInfoContainer,
   RightSideTitle,
@@ -12,6 +7,12 @@ import {
   RightSideRow,
   RightSideDescription
 } from './styles';
+
+import Precipitation from '@/assets/icons/precipitation.svg';
+import Press from '@/assets/icons/pressure.svg';
+import Temp from '@/assets/icons/temp.svg';
+import Wind from '@/assets/icons/wind.svg';
+
 
 export const RightSideInfo = () => (
   <RightSideInfoContainer>

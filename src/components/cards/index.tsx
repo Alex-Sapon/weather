@@ -1,9 +1,10 @@
 import React from 'react';
 
+import { CardsContainer, CardsControlLeft, CardsControl, CardsItems } from './styles';
+
+import Sun from '@/assets/icons/sun.svg';
 import { Button } from '@/components/button';
 import { Card } from '@/components/card';
-import Sun from '@/assets/icons/sun.svg';
-import { CardsContainer, CardsControlLeft, CardsControl, CardsItems } from './styles';
 
 const cards: number[] = [1, 2, 3, 4, 5, 6];
 
