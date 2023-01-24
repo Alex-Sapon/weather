@@ -1,3 +1,3 @@
-import { AppStateType } from '@/store';
+import { RootState } from '@/store';
 
-export const selectAppTheme = (state: AppStateType) => state.appReducer.theme;
+export const selectAppTheme = (state: RootState) => state.appReducer.theme;

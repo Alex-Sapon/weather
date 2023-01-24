@@ -60,7 +60,10 @@
           ["@/styles", "./src/styles"],
           ["@/assets", "./src/assets"],
           ["@/store", "./src/store"],
-          ["@/sagas", "./src/sagas"]
+          ["@/sagas", "./src/sagas"],
+          ["@/api", "./src/api"],
+          ["@/hooks", "./src/hooks"],
+          ["@/helpers", "./src/helpers"]
         ],
         "extensions": [".ts", ".js", ".jsx", ".tsx", ".json"]
       }

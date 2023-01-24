@@ -9,14 +9,21 @@ import {
   LeftSideCity,
 } from './styles';
 
-import Sun from '@/assets/icons/sun.svg';
+import { getIcon } from '@/helpers';
+import { useAppSelector } from '@/hooks';
 
-export const LeftSideInfo = () => (
-  <LeftSideInfoContainer>
-    <LeftSideTemperature>20&deg;</LeftSideTemperature>
-    <LeftSideDay>Сегодня</LeftSideDay>
-    <LeftSideWeather src={Sun}/>
-    <LeftSideTime>Время: 21:54</LeftSideTime>
-    <LeftSideCity>Город: Санкт-Петербург</LeftSideCity>
-  </ LeftSideInfoContainer>
-);
+export const LeftSideInfo = () => {
+  const temp = useAppSelector(state => state.openWeatherReducer.data.main?.temp);
+  const city = useAppSelector(state => state.openWeatherReducer.data.name);
+  const icon = useAppSelector(state => state.openWeatherReducer.data.weather[0].main);
+
+  return (
+    <LeftSideInfoContainer>
+      <LeftSideTemperature>{Math.round(temp - 273.15) || 0}&deg;</LeftSideTemperature>
+      <LeftSideDay>Сегодня</LeftSideDay>
+      <LeftSideWeather src={getIcon(icon)}/>
+      <LeftSideTime>Дата:  {new Date().toLocaleDateString()}</LeftSideTime>
+      <LeftSideCity>Город:  {city}</LeftSideCity>
+    </ LeftSideInfoContainer>
+  );
+};

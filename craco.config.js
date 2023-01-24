@@ -10,6 +10,9 @@ module.exports = {
       '@/styles': resolvePath('./src/styles'),
       '@/store': resolvePath('./src/store'),
       '@/sagas': resolvePath('./src/sagas'),
+      '@/api': resolvePath('./src/api'),
+      '@/hooks': resolvePath('./src/hooks'),
+      '@/helpers': resolvePath('./src/helpers'),
     }
   },
 };

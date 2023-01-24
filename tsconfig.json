@@ -27,6 +27,9 @@
       "@/assets/*": ["src/assets/*"],
       "@/store/*": ["src/store/*"],
       "@/sagas/*": ["src/sagas/*"],
+      "@/api/*": ["src/api/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/helpers/*": ["src/helpers/*"],
     }
   },
   "include": [ "src", "**/*.config.js" ]

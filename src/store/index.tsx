@@ -2,10 +2,11 @@ import { applyMiddleware, combineReducers, compose, legacy_createStore as create
 import createSagaMiddleware from 'redux-saga';
 
 import { rootWatcher } from '@/sagas';
-import { appReducer } from '@/store/reducers';
+import { appReducer, openWeatherReducer } from '@/store/reducers';
 
 const rootReducer = combineReducers({
   appReducer,
+  openWeatherReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -18,8 +19,6 @@ export const store = createStore(
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
-export type AppStateType = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
 
 sagaMiddleware.run(rootWatcher);
-
-

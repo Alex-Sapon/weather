@@ -1,4 +1,24 @@
+import { OpenWeather } from '@/api/openweather';
+
 export const changeTheme = (value: string) => ({
-  type: 'CHANGE-APP-THEME',
-  payload: value ,
+  type: 'APP/CHANGE-APP-THEME',
+  payload: value,
+} as const);
+
+export const setCoordinates = (latitude: number, longitude: number) => ({
+  type: 'APP/SET_COORDINATES',
+  payload: {
+    latitude,
+    longitude,
+  },
+} as const);
+
+export const setWeatherData = (data: OpenWeather.RootObject) => ({
+  type: 'OPEN_WEATHER/SET_WEATHER_DATA',
+  payload: data
+} as const);
+
+export const setInitialize = (value: boolean) => ({
+  type: 'APP/SET_INITIALISE',
+  payload: value
 } as const);
