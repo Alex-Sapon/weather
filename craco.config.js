@@ -13,6 +13,7 @@ module.exports = {
       '@/api': resolvePath('./src/api'),
       '@/hooks': resolvePath('./src/hooks'),
       '@/helpers': resolvePath('./src/helpers'),
+      '@/constants': resolvePath('./src/constants'),
     }
   },
 };

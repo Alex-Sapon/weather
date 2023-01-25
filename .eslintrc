@@ -63,7 +63,8 @@
           ["@/sagas", "./src/sagas"],
           ["@/api", "./src/api"],
           ["@/hooks", "./src/hooks"],
-          ["@/helpers", "./src/helpers"]
+          ["@/helpers", "./src/helpers"],
+          ["@/constants", "./src/constants"]
         ],
         "extensions": [".ts", ".js", ".jsx", ".tsx", ".json"]
       }

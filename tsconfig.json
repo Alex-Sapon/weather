@@ -30,6 +30,7 @@
       "@/api/*": ["src/api/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/helpers/*": ["src/helpers/*"],
+      "@/constants/*": ["src/constants/*"],
     }
   },
   "include": [ "src", "**/*.config.js" ]

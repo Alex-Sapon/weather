@@ -12,32 +12,43 @@ import Precipitation from '@/assets/icons/precipitation.svg';
 import Press from '@/assets/icons/pressure.svg';
 import Temp from '@/assets/icons/temp.svg';
 import Wind from '@/assets/icons/wind.svg';
+import { useAppSelector } from '@/hooks';
 
+export const RightSideInfo = () => {
+  const temp = useAppSelector(state => state.openWeatherReducer.data.main.temp);
+  const feelsLike = useAppSelector(state => state.openWeatherReducer.data.main.feels_like);
+  const press = useAppSelector(state => state.openWeatherReducer.data.main.pressure);
+  const speed = useAppSelector(state => state.openWeatherReducer.data.wind.speed);
 
-export const RightSideInfo = () => (
-  <RightSideInfoContainer>
-    <RightSideRow>
-      <RightSideLogo src={Temp} />
-      <RightSideTitle>Температура</RightSideTitle>
-      <RightSideDescription>20&deg; - ощущается как 17&deg;</RightSideDescription>
-    </RightSideRow>
+  return (
+    <RightSideInfoContainer>
+      <RightSideRow>
+        <RightSideLogo src={Temp} />
+        <RightSideTitle>Температура</RightSideTitle>
+        <RightSideDescription>
+          {Math.round(temp - 273.15)}&deg; - ощущается как {Math.round(feelsLike - 273.15)}&deg;
+        </RightSideDescription>
+      </RightSideRow>
 
-    <RightSideRow>
-      <RightSideLogo src={Press} />
-      <RightSideTitle>Давление</RightSideTitle>
-      <RightSideDescription>765 мм ртутного столба - нормальное</RightSideDescription>
-    </RightSideRow>
+      <RightSideRow>
+        <RightSideLogo src={Press} />
+        <RightSideTitle>Давление</RightSideTitle>
+        <RightSideDescription>
+          {Math.round(press / 1.333)} мм ртутного столба
+        </RightSideDescription>
+      </RightSideRow>
 
-    <RightSideRow>
-      <RightSideLogo src={Precipitation} />
-      <RightSideTitle>Осадки</RightSideTitle>
-      <RightSideDescription>Без осадков</RightSideDescription>
-    </RightSideRow>
+      <RightSideRow>
+        <RightSideLogo src={Precipitation} />
+        <RightSideTitle>Осадки</RightSideTitle>
+        <RightSideDescription>Без осадков</RightSideDescription>
+      </RightSideRow>
 
-    <RightSideRow>
-      <RightSideLogo src={Wind} />
-      <RightSideTitle>Ветер</RightSideTitle>
-      <RightSideDescription>3 м/с юго-запад - легкий ветер</RightSideDescription>
-    </RightSideRow>
-  </RightSideInfoContainer>
-);
+      <RightSideRow>
+        <RightSideLogo src={Wind} />
+        <RightSideTitle>Ветер</RightSideTitle>
+        <RightSideDescription>{speed} м/с</RightSideDescription>
+      </RightSideRow>
+    </RightSideInfoContainer>
+  );
+};

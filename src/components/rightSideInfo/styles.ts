@@ -25,6 +25,7 @@ export const RightSideRow = styled.div`
 
 export const RightSideLogo = styled.img`
   height: 45px;
+  width: 45px;
   background: #fff;
   padding: 7px;
   border-radius: 100%;
