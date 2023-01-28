@@ -12,7 +12,7 @@ export const apiOpenWeather = {
   fetchWeather(latitude: number, longitude: number): Promise<AxiosResponse<OpenWeather.RootObject>> {
     return instance.get(`?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`);
   },
-  fetchWeatherCountry(city: string): Promise<AxiosResponse<OpenWeather.RootObject>> {
+  fetchWeatherCity(city: string): Promise<AxiosResponse<OpenWeather.RootObject>> {
     return instance.get(`?q=${city}&appid=${API_KEY}`);
   },
 };

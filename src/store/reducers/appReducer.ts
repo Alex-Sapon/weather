@@ -1,4 +1,4 @@
-import { changeTheme, setCoordinates, setInitialize } from '@/store/actions';
+import { changeTheme, setInitialize } from '@/store/actions';
 
 const initialState: StateType = {
   isInitialized: false,
@@ -27,5 +27,4 @@ type StateType = {
 
 type ActionType =
   | ReturnType<typeof changeTheme>
-  | ReturnType<typeof setCoordinates>
   | ReturnType<typeof setInitialize>;

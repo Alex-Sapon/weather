@@ -10,7 +10,9 @@ export function* rootWatcher() {
       try {
         yield call(saga);
         break;
-      } catch (e) { /* empty */ }
+      } catch (error) {
+        console.log(error);
+      }
     }
   }));
 

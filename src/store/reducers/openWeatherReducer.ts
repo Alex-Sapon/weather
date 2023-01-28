@@ -34,7 +34,7 @@ function* loadOpenWeatherDataBasic() {
 
 function* loadOpenWeatherDataCity() {
   const response: AxiosResponse<OpenWeather.RootObject> = yield call(
-    apiOpenWeather.fetchWeatherCountry,
+    apiOpenWeather.fetchWeatherCity,
     'London'
   );
   // eslint-disable-next-line no-console

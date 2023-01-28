@@ -5,14 +5,6 @@ export const changeTheme = (value: string) => ({
   payload: value,
 } as const);
 
-export const setCoordinates = (latitude: number, longitude: number) => ({
-  type: 'APP/SET_COORDINATES',
-  payload: {
-    latitude,
-    longitude,
-  },
-} as const);
-
 export const setWeatherData = (data: OpenWeather.RootObject) => ({
   type: 'OPEN_WEATHER/SET_WEATHER_DATA',
   payload: data
