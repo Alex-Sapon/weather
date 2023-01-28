@@ -1,14 +1,15 @@
 import { AxiosResponse } from 'axios';
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { apiOpenWeather, OpenWeather } from '@/api/openweather';
+import { apiOpenWeather } from '@/api/openweather';
+import { getUserLocation } from '@/helpers';
 import { setInitialize, setWeatherData } from '@/store/actions';
+import { OpenWeather } from '@/types';
 
 const initialState = {
   data: {} as OpenWeather.RootObject
 };
 
-// eslint-disable-next-line @typescript-eslint/default-param-last
 export const openWeatherReducer = (state: StateType = initialState, action: ActionType) => {
   switch (action.type) {
   case 'OPEN_WEATHER/SET_WEATHER_DATA':
@@ -18,17 +19,31 @@ export const openWeatherReducer = (state: StateType = initialState, action: Acti
   }
 };
 
-export function* loadOpenWeatherData() {
-  const { latitude, longitude } = yield select((state: any) => state.appReducer);
+function* loadOpenWeatherDataBasic() {
+  const location: GeolocationPosition = yield call(getUserLocation);
 
-  const response: AxiosResponse<OpenWeather.RootObject> = yield call(apiOpenWeather.fetchWeather, latitude, longitude);
+  const response: AxiosResponse<OpenWeather.RootObject> = yield call(
+    apiOpenWeather.fetchWeather,
+    location.coords.latitude,
+    location.coords.longitude
+  );
 
   yield put(setWeatherData(response.data));
   yield put(setInitialize(true));
 }
 
+function* loadOpenWeatherDataCity() {
+  const response: AxiosResponse<OpenWeather.RootObject> = yield call(
+    apiOpenWeather.fetchWeatherCountry,
+    'London'
+  );
+  // eslint-disable-next-line no-console
+  console.log(response.data);
+}
+
 export function* watchOpenWeather() {
-  yield takeEvery('LOAD_WEATHER_DATA', loadOpenWeatherData);
+  yield takeEvery('LOAD_WEATHER_DATA_BASIC', loadOpenWeatherDataBasic);
+  yield takeEvery('LOAD_WEATHER_DATA_CITY', loadOpenWeatherDataCity);
 }
 
 type StateType = {

@@ -1,8 +1,18 @@
-import { all } from 'redux-saga/effects';
+import { all, call, spawn } from 'redux-saga/effects';
 
-import { watchApp } from '@/store/reducers/appReducer';
-import { watchOpenWeather } from '@/store/reducers/openWeatherReducer';
+import { watchOpenWeather } from '@/store/reducers';
 
 export function* rootWatcher() {
-  yield all([watchApp(), watchOpenWeather()]);
+  const sagas = [watchOpenWeather];
+
+  const retrySagas = sagas.map(saga => spawn(function* () {
+    while (true) {
+      try {
+        yield call(saga);
+        break;
+      } catch (e) { /* empty */ }
+    }
+  }));
+
+  yield all(retrySagas);
 }

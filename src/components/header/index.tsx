@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import LogoApp from '@/assets/icons/logo.svg';
 import ThemeLogo from '@/assets/icons/theme_logo.svg';
-import { HeaderContainer, Logo, Control, ThemeButton, Input } from '@/components/header/styles';
+import { Control, HeaderContainer, Input, Logo, ThemeButton } from '@/components/header/styles';
+import { useAppSelector } from '@/hooks';
 import { changeTheme } from '@/store/actions';
-import { selectAppTheme } from '@/store/selectors';
 
 export const Header = () => {
+  const [city, setCity] = useState('');
+
   const dispatch = useDispatch();
 
-  const currentTheme = useSelector(selectAppTheme);
+  const currentTheme = useAppSelector(state => state.appReducer.theme);
+
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setCity(event.currentTarget.value);
+  };
   
   const onChangeThemeClick = () => {
     dispatch(changeTheme(currentTheme === 'light' ? 'dark' : 'light'));
@@ -22,7 +28,11 @@ export const Header = () => {
       <Logo src={LogoApp} alt='Logo' />
       <Control>
         <ThemeButton src={ThemeLogo} onClick={onChangeThemeClick}/>
-        <Input placeholder='Выбрать город'/>
+        <Input
+          placeholder='Выбрать город'
+          value={city}
+          onChange={handleOnChange}
+        />
       </Control>
     </HeaderContainer>
   );

@@ -12,6 +12,8 @@
   ],
   "parserOptions": { "project": "./tsconfig.json" },
   "rules": {
+    "@typescript-eslint/default-param-last": 0,
+    "func-names": ["error", "never"],
     "quotes": "off",
     "@typescript-eslint/quotes": ["error", "single"],
     "semi": ["error", "always"],
@@ -48,7 +50,6 @@
       { "namedComponents": "arrow-function" }
     ],
     "no-unused-expressions": "off",
-    "default-param-last": "off",
     "operator-linebreak": "off"
   },
   "plugins": ["react", "prettier"],
@@ -64,7 +65,8 @@
           ["@/api", "./src/api"],
           ["@/hooks", "./src/hooks"],
           ["@/helpers", "./src/helpers"],
-          ["@/constants", "./src/constants"]
+          ["@/constants", "./src/constants"],
+          ["@/types", "./src/types"]
         ],
         "extensions": [".ts", ".js", ".jsx", ".tsx", ".json"]
       }

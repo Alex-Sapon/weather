@@ -10,24 +10,16 @@ import { Header } from '@/components/header';
 import { Info } from '@/components/info';
 import { Spinner } from '@/components/spinner';
 import { useAppSelector } from '@/hooks';
-import { setCoordinates } from '@/store/actions';
-import { GlobalStyles } from '@/styles/global';
-import { theme } from '@/styles/theme';
+import { GlobalStyles, theme } from '@/styles';
 
 export const App = () => {
   const currentTheme = useAppSelector(state => state.appReducer.theme);
   const isInitialized = useAppSelector(state => state.appReducer.isInitialized);
 
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      dispatch(setCoordinates(
-        position.coords.latitude,
-        position.coords.longitude,
-      ));
-      dispatch({ type: 'LOAD_WEATHER_DATA' });
-    });
+    dispatch({ type: 'LOAD_WEATHER_DATA_BASIC' });
   }, []);
 
   if (!isInitialized) return <Spinner theme={currentTheme}/>;

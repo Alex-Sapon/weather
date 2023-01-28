@@ -1,4 +1,4 @@
-import { OpenWeather } from '@/api/openweather';
+import { OpenWeather } from '@/types';
 
 export const changeTheme = (value: string) => ({
   type: 'APP/CHANGE-APP-THEME',

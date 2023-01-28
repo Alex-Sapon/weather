@@ -31,7 +31,8 @@
       "@/hooks/*": ["src/hooks/*"],
       "@/helpers/*": ["src/helpers/*"],
       "@/constants/*": ["src/constants/*"],
+      "@/types/*": ["src/types/*"],
     }
   },
-  "include": [ "src", "**/*.config.js" ]
+  "include": [ "src", "**/*.js" ]
 }

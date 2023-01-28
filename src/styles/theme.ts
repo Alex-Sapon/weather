@@ -41,7 +41,7 @@ const color = {
 
 
 // ----- boxShadow -----
-export const boxShadow = {
+const boxShadow = {
   light: '2px 5px 25px -3px rgba(180, 180, 180, 0.25)',
   dark: '2px 5px 20px -5px rgba(180, 180, 180, 0.25)',
 };
