@@ -1,6 +1,8 @@
+import { AxiosError } from 'axios';
 import { all, call, spawn } from 'redux-saga/effects';
 
-import { watchOpenWeather } from '@/store/reducers';
+import { handleAppError } from '@/helpers';
+import { watchOpenWeather } from '@/sagas/openWeatherSaga';
 
 export function* rootWatcher() {
   const sagas = [watchOpenWeather];
@@ -11,7 +13,7 @@ export function* rootWatcher() {
         yield call(saga);
         break;
       } catch (error) {
-        console.log(error);
+        yield handleAppError(error as AxiosError);
       }
     }
   }));

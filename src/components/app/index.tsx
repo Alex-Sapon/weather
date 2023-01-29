@@ -5,21 +5,26 @@ import { ThemeProvider } from 'styled-components';
 
 import { AppContainer } from './styles';
 
+import { AlertBar } from '@/components/alertBar';
 import { Cards } from '@/components/cards';
 import { Header } from '@/components/header';
 import { Info } from '@/components/info';
 import { Spinner } from '@/components/spinner';
 import { useAppSelector } from '@/hooks';
+import { loadWeatherDataBasic, setAppError } from '@/store/actions';
 import { GlobalStyles, theme } from '@/styles';
 
 export const App = () => {
   const currentTheme = useAppSelector(state => state.appReducer.theme);
   const isInitialized = useAppSelector(state => state.appReducer.isInitialized);
+  const error = useAppSelector(state => state.appReducer.error);
 
   const dispatch = useDispatch();
   
+  const handleOnClose = () => dispatch(setAppError(''));
+  
   useEffect(() => {
-    dispatch({ type: 'LOAD_WEATHER_DATA_BASIC' });
+    dispatch(loadWeatherDataBasic());
   }, []);
 
   if (!isInitialized) return <Spinner theme={currentTheme}/>;
@@ -30,8 +35,9 @@ export const App = () => {
         <Header />
         <Info />
         <Cards />
-        <GlobalStyles />
       </AppContainer>
+      <AlertBar error={error} onClose={handleOnClose} seconds={5000} />
+      <GlobalStyles />
     </ThemeProvider>
   );
 };

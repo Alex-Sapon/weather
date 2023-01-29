@@ -1,22 +1,24 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import { Control, HeaderContainer, Input, Logo, ThemeButton } from './styles';
+
 import LogoApp from '@/assets/icons/logo.svg';
 import ThemeLogo from '@/assets/icons/theme_logo.svg';
-import { Control, HeaderContainer, Input, Logo, ThemeButton } from '@/components/header/styles';
 import { useAppSelector } from '@/hooks';
-import { changeTheme } from '@/store/actions';
+import { changeTheme, loadWeatherDataBasic, loadWeatherDataCity } from '@/store/actions';
 
 export const Header = () => {
-  const [city, setCity] = useState('');
-
   const dispatch = useDispatch();
 
   const currentTheme = useAppSelector(state => state.appReducer.theme);
 
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setCity(event.currentTarget.value);
+  const onSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+    if (value) {
+      dispatch(loadWeatherDataCity(value));
+    } else dispatch(loadWeatherDataBasic());
   };
   
   const onChangeThemeClick = () => {
@@ -30,8 +32,7 @@ export const Header = () => {
         <ThemeButton src={ThemeLogo} onClick={onChangeThemeClick}/>
         <Input
           placeholder='Выбрать город'
-          value={city}
-          onChange={handleOnChange}
+          onChange={onSearch}
         />
       </Control>
     </HeaderContainer>

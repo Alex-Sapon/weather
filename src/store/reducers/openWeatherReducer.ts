@@ -1,9 +1,4 @@
-import { AxiosResponse } from 'axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
-
-import { apiOpenWeather } from '@/api/openweather';
-import { getUserLocation } from '@/helpers';
-import { setInitialize, setWeatherData } from '@/store/actions';
+import { setWeatherData } from '@/store/actions';
 import { OpenWeather } from '@/types';
 
 const initialState = {
@@ -18,33 +13,6 @@ export const openWeatherReducer = (state: StateType = initialState, action: Acti
     return state;
   }
 };
-
-function* loadOpenWeatherDataBasic() {
-  const location: GeolocationPosition = yield call(getUserLocation);
-
-  const response: AxiosResponse<OpenWeather.RootObject> = yield call(
-    apiOpenWeather.fetchWeather,
-    location.coords.latitude,
-    location.coords.longitude
-  );
-
-  yield put(setWeatherData(response.data));
-  yield put(setInitialize(true));
-}
-
-function* loadOpenWeatherDataCity() {
-  const response: AxiosResponse<OpenWeather.RootObject> = yield call(
-    apiOpenWeather.fetchWeatherCity,
-    'London'
-  );
-  // eslint-disable-next-line no-console
-  console.log(response.data);
-}
-
-export function* watchOpenWeather() {
-  yield takeEvery('LOAD_WEATHER_DATA_BASIC', loadOpenWeatherDataBasic);
-  yield takeEvery('LOAD_WEATHER_DATA_CITY', loadOpenWeatherDataCity);
-}
 
 type StateType = {
   data: OpenWeather.RootObject

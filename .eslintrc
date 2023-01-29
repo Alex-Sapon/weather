@@ -12,9 +12,10 @@
   ],
   "parserOptions": { "project": "./tsconfig.json" },
   "rules": {
-    "@typescript-eslint/default-param-last": 0,
     "func-names": ["error", "never"],
+    "consistent-return": "off",
     "quotes": "off",
+    "@typescript-eslint/default-param-last": 0,
     "@typescript-eslint/quotes": ["error", "single"],
     "semi": ["error", "always"],
     "indent": ["error", 2],
