@@ -2,36 +2,26 @@ import React from 'react';
 
 import { CardsContainer, CardsControlLeft, CardsControl, CardsItems } from './styles';
 
-import Sun from '@/assets/icons/sun.svg';
 import { Button } from '@/components/button';
 import { Card } from '@/components/card';
-
-const cards: number[] = [1, 2, 3, 4, 5, 6];
+import { useAppSelector } from '@/hooks';
 
 export const Cards = () => {
-  const onButtonClick = () => {};
+  const list = useAppSelector(state => state.openWeatherReducer.forecastData.list);
   
   return (
     <CardsContainer>
       <CardsControl>
         <CardsControlLeft>
-          <Button text='На неделю' handleClick={onButtonClick} />
-          <Button text='На месяц' handleClick={onButtonClick} />
-          <Button text='На 10 дней' handleClick={onButtonClick} />
+          <Button text='На неделю' handleClick={() => {}} />
+          <Button text='На месяц' handleClick={() => {}} />
+          <Button text='На 10 дней' handleClick={() => {}} />
         </CardsControlLeft>
-        <Button text='Отменить' handleClick={onButtonClick} />
+        <Button text='Отменить' handleClick={() => {}} />
       </CardsControl>
       <CardsItems>
-        {cards.map((i) =>
-          <Card
-            key={i}
-            day="Сегодня"
-            date="28 авг"
-            image={Sun}
-            tempAM='+18&deg;'
-            tempPM='+18&deg;'
-            desc='Облачно'
-          />
+        {list.map(data =>
+          <Card key={data.dt} props={data} />
         )}
       </CardsItems>
     </CardsContainer>

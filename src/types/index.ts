@@ -44,7 +44,7 @@ export declare module OpenWeather {
     sunset: number;
   }
 
-  export interface RootObject {
+  export interface RootData {
     coordinates: Coordinates;
     weather: Weather[];
     base: string;
@@ -60,4 +60,66 @@ export declare module OpenWeather {
     name: string;
     cod: number;
   }
+}
+
+
+// OpenWeatherForecast
+export interface OpenWeatherForecast {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: DayOfForecast[];
+  city: City;
+}
+
+export interface City {
+  id: number;
+  name: string;
+  coord: OpenWeather.Coordinates;
+  country: string;
+}
+
+export interface DayOfForecast {
+  dt: number;
+  main: Main;
+  weather: Weather[];
+  clouds: Clouds;
+  wind: Wind;
+  snow: Snow;
+  sys: Sys;
+  dt_txt: Date;
+}
+
+export interface Clouds {
+  all: number;
+}
+
+export interface Main {
+  temp: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
+  sea_level: number;
+  grnd_level: number;
+  humidity: number;
+  temp_kf: number;
+}
+
+export interface Snow {
+}
+
+export interface Sys {
+  pod: string;
+}
+
+export interface Weather {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
+export interface Wind {
+  speed: number;
+  deg: number;
 }

@@ -15,10 +15,10 @@ import Wind from '@/assets/icons/wind.svg';
 import { useAppSelector } from '@/hooks';
 
 export const RightSideInfo = () => {
-  const temp = useAppSelector(state => state.openWeatherReducer.data.main.temp);
-  const feelsLike = useAppSelector(state => state.openWeatherReducer.data.main.feels_like);
-  const press = useAppSelector(state => state.openWeatherReducer.data.main.pressure);
-  const speed = useAppSelector(state => state.openWeatherReducer.data.wind.speed);
+  const temp = useAppSelector(state => state.openWeatherReducer.currentData.main.temp);
+  const feelsLike = useAppSelector(state => state.openWeatherReducer.currentData.main.feels_like);
+  const press = useAppSelector(state => state.openWeatherReducer.currentData.main.pressure);
+  const speed = useAppSelector(state => state.openWeatherReducer.currentData.wind.speed);
 
   return (
     <RightSideInfoContainer>

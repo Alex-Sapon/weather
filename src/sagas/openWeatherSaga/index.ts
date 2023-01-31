@@ -1,34 +1,45 @@
 import { AxiosResponse } from 'axios';
-import { call, debounce, put, takeEvery } from 'redux-saga/effects';
+import { call, debounce, fork, put } from 'redux-saga/effects';
 
 import { apiOpenWeather } from '@/api';
 import { getUserLocation } from '@/helpers';
-import { loadWeatherDataCity, setInitialize, setWeatherData } from '@/store/actions';
-import { OpenWeather } from '@/types';
+import {
+  loadWeatherDataCity,
+  setInitialize,
+  setWeatherCurrentData,
+  setWeatherForecastData
+} from '@/store/actions';
+import { OpenWeather, OpenWeatherForecast } from '@/types';
 
-function* loadOpenWeatherDataBasic() {
+function* loadOpenWeatherCurrentData() {
   const location: GeolocationPosition = yield call(getUserLocation);
 
-  const response: AxiosResponse<OpenWeather.RootObject> = yield call(
-    apiOpenWeather.fetchWeather,
+  const weather: AxiosResponse<OpenWeather.RootData> = yield call(
+    apiOpenWeather.fetchWeatherCurrent,
     location.coords.latitude,
-    location.coords.longitude
+    location.coords.longitude,
   );
 
-  yield put(setWeatherData(response.data));
+  const forecast: AxiosResponse<OpenWeatherForecast> = yield call(
+    apiOpenWeather.fetchForecastFourDays,
+    weather.data.id,
+  );
+
+  yield put(setWeatherCurrentData(weather.data));
+  yield put(setWeatherForecastData(forecast.data));
   yield put(setInitialize(true));
 }
 
-export function* loadOpenWeatherDataCity(action: ReturnType<typeof loadWeatherDataCity>) {
-  const response: AxiosResponse<OpenWeather.RootObject> = yield call(
+export function* loadOpenWeatherCityData(action: ReturnType<typeof loadWeatherDataCity>) {
+  const response: AxiosResponse<OpenWeather.RootData> = yield call(
     apiOpenWeather.fetchWeatherCity,
-    action.payload.city
+    action.payload.city,
   );
 
-  yield put(setWeatherData(response.data));
+  yield put(setWeatherCurrentData(response.data));
 }
 
 export function* watchOpenWeather() {
-  yield takeEvery('LOAD_WEATHER_DATA_BASIC', loadOpenWeatherDataBasic);
-  yield debounce(600, 'LOAD_WEATHER_DATA_CITY', loadOpenWeatherDataCity);
+  yield fork(loadOpenWeatherCurrentData);
+  yield debounce(600, 'LOAD_WEATHER_DATA_CITY', loadOpenWeatherCityData);
 }

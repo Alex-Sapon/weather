@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useDispatch } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
@@ -11,7 +11,7 @@ import { Header } from '@/components/header';
 import { Info } from '@/components/info';
 import { Spinner } from '@/components/spinner';
 import { useAppSelector } from '@/hooks';
-import { loadWeatherDataBasic, setAppError } from '@/store/actions';
+import { setAppError } from '@/store/actions';
 import { GlobalStyles, theme } from '@/styles';
 
 export const App = () => {
@@ -22,10 +22,6 @@ export const App = () => {
   const dispatch = useDispatch();
   
   const handleOnClose = () => dispatch(setAppError(''));
-  
-  useEffect(() => {
-    dispatch(loadWeatherDataBasic());
-  }, []);
 
   if (!isInitialized) return <Spinner theme={currentTheme}/>;
 
