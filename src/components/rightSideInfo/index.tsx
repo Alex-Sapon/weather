@@ -19,6 +19,7 @@ export const RightSideInfo = () => {
   const feelsLike = useAppSelector(state => state.openWeatherReducer.currentData.main.feels_like);
   const press = useAppSelector(state => state.openWeatherReducer.currentData.main.pressure);
   const speed = useAppSelector(state => state.openWeatherReducer.currentData.wind.speed);
+  const desc = useAppSelector(state => state.openWeatherReducer.currentData.weather[0].description);
 
   return (
     <RightSideInfoContainer>
@@ -26,7 +27,7 @@ export const RightSideInfo = () => {
         <RightSideLogo src={Temp} />
         <RightSideTitle>Температура</RightSideTitle>
         <RightSideDescription>
-          {Math.round(temp - 273.15)}&deg; - ощущается как {Math.round(feelsLike - 273.15)}&deg;
+          {Math.round(temp)}&deg; - ощущается как {Math.round(feelsLike)}&deg;
         </RightSideDescription>
       </RightSideRow>
 
@@ -40,8 +41,8 @@ export const RightSideInfo = () => {
 
       <RightSideRow>
         <RightSideLogo src={Precipitation} />
-        <RightSideTitle>Осадки</RightSideTitle>
-        <RightSideDescription>Без осадков</RightSideDescription>
+        <RightSideTitle>Погода</RightSideTitle>
+        <RightSideDescription>{desc}</RightSideDescription>
       </RightSideRow>
 
       <RightSideRow>

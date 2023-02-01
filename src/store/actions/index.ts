@@ -1,4 +1,4 @@
-import { OpenWeather, OpenWeatherForecast } from '@/types';
+import { OpenWeather, ForecastType } from '@/types';
 
 export const changeTheme = (value: string) => ({
   type: 'APP/CHANGE-APP-THEME',
@@ -10,7 +10,7 @@ export const setWeatherCurrentData = (data: OpenWeather.RootData) => ({
   payload: data
 } as const);
 
-export const setWeatherForecastData = (data: OpenWeatherForecast) => ({
+export const setWeatherForecastData = (data: ForecastType) => ({
   type: 'OPEN_WEATHER/SET_FORECAST_WEATHER_DATA',
   payload: data
 } as const);
@@ -25,13 +25,11 @@ export const setAppError = (error: string) => ({
   payload: error
 } as const);
 
-export const loadWeatherDataBasic = () => ({
+export const setWeatherDataBasic = () => ({
   type: 'LOAD_WEATHER_DATA_BASIC',
 } as const);
 
-export const loadWeatherDataCity = (city: string) => ({
-  type: 'LOAD_WEATHER_DATA_CITY',
-  payload: {
-    city
-  }
+export const setWeatherDataCity = (city: string) => ({
+  type: 'LOAD_WEATHER_CITY_DATA',
+  payload: city
 } as const);

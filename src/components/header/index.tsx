@@ -7,7 +7,7 @@ import { Control, HeaderContainer, Input, Logo, ThemeButton } from './styles';
 import LogoApp from '@/assets/icons/logo.svg';
 import ThemeLogo from '@/assets/icons/theme_logo.svg';
 import { useAppSelector } from '@/hooks';
-import { changeTheme, loadWeatherDataBasic, loadWeatherDataCity } from '@/store/actions';
+import { changeTheme, setWeatherDataBasic, setWeatherDataCity } from '@/store/actions';
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -16,9 +16,9 @@ export const Header = () => {
 
   const onSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
-    if (value) {
-      dispatch(loadWeatherDataCity(value));
-    } else dispatch(loadWeatherDataBasic());
+
+    if (value) dispatch(setWeatherDataCity(value));
+    else dispatch(setWeatherDataBasic());
   };
   
   const onChangeThemeClick = () => {

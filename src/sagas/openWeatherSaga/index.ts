@@ -4,12 +4,12 @@ import { call, debounce, fork, put } from 'redux-saga/effects';
 import { apiOpenWeather } from '@/api';
 import { getUserLocation } from '@/helpers';
 import {
-  loadWeatherDataCity,
+  setWeatherDataCity,
   setInitialize,
   setWeatherCurrentData,
-  setWeatherForecastData
+  setWeatherForecastData,
 } from '@/store/actions';
-import { OpenWeather, OpenWeatherForecast } from '@/types';
+import { OpenWeather, ForecastType } from '@/types';
 
 function* loadOpenWeatherCurrentData() {
   const location: GeolocationPosition = yield call(getUserLocation);
@@ -20,9 +20,9 @@ function* loadOpenWeatherCurrentData() {
     location.coords.longitude,
   );
 
-  const forecast: AxiosResponse<OpenWeatherForecast> = yield call(
-    apiOpenWeather.fetchForecastFourDays,
-    weather.data.id,
+  const forecast: AxiosResponse<ForecastType> = yield call(
+    apiOpenWeather.fetchForecastDays,
+    weather.data.id
   );
 
   yield put(setWeatherCurrentData(weather.data));
@@ -30,16 +30,22 @@ function* loadOpenWeatherCurrentData() {
   yield put(setInitialize(true));
 }
 
-export function* loadOpenWeatherCityData(action: ReturnType<typeof loadWeatherDataCity>) {
-  const response: AxiosResponse<OpenWeather.RootData> = yield call(
+export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDataCity>) {
+  const weather: AxiosResponse<OpenWeather.RootData> = yield call(
     apiOpenWeather.fetchWeatherCity,
-    action.payload.city,
+    action.payload,
   );
 
-  yield put(setWeatherCurrentData(response.data));
+  const forecast: AxiosResponse<ForecastType> = yield call(
+    apiOpenWeather.fetchForecastDays,
+    weather.data.id
+  );
+
+  yield put(setWeatherCurrentData(weather.data));
+  yield put(setWeatherForecastData(forecast.data));
 }
 
 export function* watchOpenWeather() {
   yield fork(loadOpenWeatherCurrentData);
-  yield debounce(600, 'LOAD_WEATHER_DATA_CITY', loadOpenWeatherCityData);
+  yield debounce(600, 'LOAD_WEATHER_CITY_DATA', loadOpenWeatherCityData);
 }

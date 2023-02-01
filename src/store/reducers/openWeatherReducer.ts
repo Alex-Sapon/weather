@@ -1,12 +1,12 @@
 import { setWeatherCurrentData, setWeatherForecastData } from '@/store/actions';
-import { OpenWeather, OpenWeatherForecast } from '@/types';
+import { OpenWeather, ForecastType } from '@/types';
 
 const initialState = {
   currentData: {} as OpenWeather.RootData,
-  forecastData: {} as OpenWeatherForecast
+  forecastData: {} as ForecastType,
 };
 
-export const openWeatherReducer = (state: StateType = initialState, action: ActionType) => {
+export const openWeatherReducer = (state: StateType = initialState, action: ActionType): StateType => {
   switch (action.type) {
   case 'OPEN_WEATHER/SET_CURRENT_WEATHER_DATA':
     return { ...state, currentData: action.payload };
@@ -19,7 +19,7 @@ export const openWeatherReducer = (state: StateType = initialState, action: Acti
 
 type StateType = {
   currentData: OpenWeather.RootData
-  forecastData: OpenWeatherForecast
+  forecastData: ForecastType
 }
 
 type ActionType =

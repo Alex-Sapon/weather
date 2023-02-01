@@ -8,13 +8,10 @@ export function* rootWatcher() {
   const sagas = [watchOpenWeather];
 
   const retrySagas = sagas.map(saga => spawn(function* () {
-    while (true) {
-      try {
-        yield call(saga);
-        break;
-      } catch (error) {
-        yield handleAppError(error as AxiosError);
-      }
+    try {
+      yield call(saga);
+    } catch (error) {
+      yield handleAppError(error as AxiosError);
     }
   }));
 

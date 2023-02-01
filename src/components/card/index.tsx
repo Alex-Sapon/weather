@@ -15,10 +15,10 @@ export const Card = ({ props }: CardProps) => (
     <CardTextLight>{new Date(props!.dt_txt).toDateString()}</CardTextLight>
     <CardImage src={getIcon(props!.weather[0]!.main)}/>
     <CardTextBold>
-      {Math.round(props!.main.temp_max! - 273.15)}&deg;
+      {Math.round(props!.main.temp_max!)}&deg;
     </CardTextBold>
     <CardTextLight>
-      {Math.round(props!.main.temp_min - 273.15)}&deg;
+      {Math.round(props!.main.temp_min)}&deg;
     </CardTextLight>
     <CardTextLight>{props!.weather[0].description}</CardTextLight>
   </CardContainer>

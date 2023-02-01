@@ -20,7 +20,7 @@ export const LeftSideInfo = () => {
   return (
     <LeftSideInfoContainer>
       <LeftSideTemperature>
-        {Math.round(temp - 273.15)}&deg;
+        {Math.round(temp)}&deg;
       </LeftSideTemperature>
       <LeftSideDay>Сегодня</LeftSideDay>
       <LeftSideWeather src={getIcon(icon)}/>

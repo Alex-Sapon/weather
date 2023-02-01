@@ -13,9 +13,7 @@ export const Cards = () => {
     <CardsContainer>
       <CardsControl>
         <CardsControlLeft>
-          <Button text='На неделю' handleClick={() => {}} />
-          <Button text='На месяц' handleClick={() => {}} />
-          <Button text='На 10 дней' handleClick={() => {}} />
+          <Button text='На 4 дня' handleClick={() => {}} />
         </CardsControlLeft>
         <Button text='Отменить' handleClick={() => {}} />
       </CardsControl>

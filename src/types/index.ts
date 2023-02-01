@@ -1,3 +1,4 @@
+// current weather
 export declare module OpenWeather {
   export interface Coordinates {
     lon: number;
@@ -64,7 +65,7 @@ export declare module OpenWeather {
 
 
 // OpenWeatherForecast
-export interface OpenWeatherForecast {
+export interface ForecastType {
   cod: string;
   message: number;
   cnt: number;
@@ -79,6 +80,8 @@ export interface City {
   country: string;
 }
 
+
+// forecast weather
 export interface DayOfForecast {
   dt: number;
   main: Main;
