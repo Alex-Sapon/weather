@@ -11,7 +11,7 @@ import {
 } from '@/store/actions';
 import { OpenWeather, ForecastType } from '@/types';
 
-function* loadOpenWeatherCurrentData() {
+function* loadCurrentData() {
   const location: GeolocationPosition = yield call(getUserLocation);
 
   const weather: AxiosResponse<OpenWeather.RootData> = yield call(
@@ -46,6 +46,6 @@ export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDat
 }
 
 export function* watchOpenWeather() {
-  yield fork(loadOpenWeatherCurrentData);
+  yield fork(loadCurrentData);
   yield debounce(600, 'LOAD_WEATHER_CITY_DATA', loadOpenWeatherCityData);
 }

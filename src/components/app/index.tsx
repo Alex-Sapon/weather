@@ -12,18 +12,19 @@ import { Info } from '@/components/info';
 import { Spinner } from '@/components/spinner';
 import { useAppSelector } from '@/hooks';
 import { setAppError } from '@/store/actions';
+import { selectAppError, selectAppTheme, selectIsInitialized } from '@/store/selectors';
 import { GlobalStyles, theme } from '@/styles';
 
 export const App = () => {
-  const currentTheme = useAppSelector(state => state.appReducer.theme);
-  const isInitialized = useAppSelector(state => state.appReducer.isInitialized);
-  const error = useAppSelector(state => state.appReducer.error);
+  const currentTheme = useAppSelector(selectAppTheme);
+  const isInitialized = useAppSelector(selectIsInitialized);
+  const error = useAppSelector(selectAppError);
 
   const dispatch = useDispatch();
-  
+
   const handleOnClose = () => dispatch(setAppError(''));
 
-  if (!isInitialized) return <Spinner theme={currentTheme}/>;
+  if (!isInitialized) return <Spinner theme={currentTheme} />;
 
   return (
     <ThemeProvider theme={theme[currentTheme]}>

@@ -2,15 +2,51 @@ import axios, { AxiosResponse } from 'axios';
 
 const API_KEY = process.env.REACT_APP_STORM_GLASS_API_KEY;
 
-const instance = axios.create({
-  baseURL: 'https://api.stormglass.io/v2/weather/point',
-  headers: {
-    'Authorization': API_KEY,
-  },
-});
+const params = 'pressure,cloudCover,cloudCover,precipitation,windSpeed';
+
+const baseURL = 'https://api.stormglass.io/v2/weather/point';
 
 export const apiStormGlass = {
-  fetchWeather(latitude: number, longitude: number): Promise<AxiosResponse<unknown>> {
-    return instance.get(`?lat=${latitude}&lng=${longitude}&params=waveHeight,airTemperature`);
+  fetchWeather(lat: number, lon: number): Promise<AxiosResponse<StormGlassType>> {
+    return axios.get(`${baseURL}?lat=${lat}&lng=${lon}&params=${params}`, {
+      headers: {
+        Authorization: API_KEY,
+      }
+    });
   },
 };
+
+export type StormGlassType = {
+  hours: HoursType[]
+  meta: MetaType
+}
+
+type HoursType = {
+  airTemperature: {
+    dwd: number
+    noaa: number
+    sg: number
+    smhi: number
+  }
+  time: Date
+  waveHeight: {
+    dwd: number
+    fcoo: number
+    fmi: number
+    icon: number
+    meteo: number
+    noaa: number
+    sg: number
+  }
+}
+
+type MetaType = {
+  cost: number
+  dailyQuota: number
+  end: Date
+  lat: number
+  lng: number
+  params: string[]
+  requestCount: number
+  start: Date
+}
