@@ -16,6 +16,6 @@ export const apiOpenWeather = {
     return instance.get(`weather?q=${city}&appid=${API_KEY}&units=metric&lang=ru`);
   },
   fetchForecastDays(id: number): Promise<AxiosResponse<ForecastType>> {
-    return instance.get(`forecast?id=${id}&appid=${API_KEY}&cnt=6&units=metric&lang=ru`);
+    return instance.get(`forecast?id=${id}&appid=${API_KEY}&cnt=&units=metric&lang=ru`);
   }
 };

@@ -1,2 +1,2 @@
 export { appReducer } from './appReducer';
-export { openWeatherReducer } from './openWeatherReducer';
+export { weatherReducer } from './openWeatherReducer';

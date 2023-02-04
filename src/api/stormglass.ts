@@ -2,9 +2,9 @@ import axios, { AxiosResponse } from 'axios';
 
 const API_KEY = process.env.REACT_APP_STORM_GLASS_API_KEY;
 
-const params = 'pressure,cloudCover,cloudCover,precipitation,windSpeed';
-
 const baseURL = 'https://api.stormglass.io/v2/weather/point';
+
+const params = 'pressure,cloudCover,cloudCover,precipitation,windSpeed';
 
 export const apiStormGlass = {
   fetchWeather(lat: number, lon: number): Promise<AxiosResponse<StormGlassType>> {
@@ -15,6 +15,8 @@ export const apiStormGlass = {
     });
   },
 };
+
+// &start=${today.toISOString()}&end=${tenDaysOut.toISOString()}
 
 export type StormGlassType = {
   hours: HoursType[]

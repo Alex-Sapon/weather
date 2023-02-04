@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+
+import { useSelector } from 'react-redux';
 
 import { CardsContainer, CardsControlLeft, CardsControl, CardsItems } from './styles';
 
 import { Button } from '@/components/button';
 import { Card } from '@/components/card';
-import { useAppSelector } from '@/hooks';
+import { selectForecastList } from '@/store/selectors';
 
 export const Cards = () => {
-  const list = useAppSelector(state => state.openWeatherReducer.forecastData.list);
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const list = useSelector(selectForecastList);
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (element) {
+      const onWheel = (event: WheelEvent) => {
+        event.preventDefault();
+        element.scrollTo({
+          left: element.scrollLeft + event.deltaY * 4,
+          behavior: 'smooth'
+        });
+      };
+
+      element.addEventListener('wheel', onWheel);
+
+      return () => element.removeEventListener('wheel', onWheel);
+    }
+  }, []);
   
   return (
     <CardsContainer>
@@ -17,7 +39,7 @@ export const Cards = () => {
         </CardsControlLeft>
         <Button text='Отменить' handleClick={() => {}} />
       </CardsControl>
-      <CardsItems>
+      <CardsItems ref={ref}>
         {list.map(data =>
           <Card key={data.dt} props={data} />
         )}

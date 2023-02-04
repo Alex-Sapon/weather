@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
+
 import {
   RightSideInfoContainer,
   RightSideTitle,
@@ -12,14 +14,20 @@ import Precipitation from '@/assets/icons/precipitation.svg';
 import Press from '@/assets/icons/pressure.svg';
 import Temp from '@/assets/icons/temp.svg';
 import Wind from '@/assets/icons/wind.svg';
-import { useAppSelector } from '@/hooks';
+import {
+  selectCurrentDesc,
+  selectCurrentFeelsLike,
+  selectCurrentPressure,
+  selectCurrentSpeed,
+  selectCurrentTemp,
+} from '@/store/selectors';
 
 export const RightSideInfo = () => {
-  const temp = useAppSelector(state => state.openWeatherReducer.currentData.main.temp);
-  const feelsLike = useAppSelector(state => state.openWeatherReducer.currentData.main.feels_like);
-  const press = useAppSelector(state => state.openWeatherReducer.currentData.main.pressure);
-  const speed = useAppSelector(state => state.openWeatherReducer.currentData.wind.speed);
-  const desc = useAppSelector(state => state.openWeatherReducer.currentData.weather[0].description);
+  const temp = useSelector(selectCurrentTemp);
+  const feelsLike = useSelector(selectCurrentFeelsLike);
+  const press = useSelector(selectCurrentPressure);
+  const speed = useSelector(selectCurrentSpeed);
+  const desc = useSelector(selectCurrentDesc);
 
   return (
     <RightSideInfoContainer>

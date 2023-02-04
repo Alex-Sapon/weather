@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
+
 import {
   LeftSideInfoContainer,
   LeftSideWeather,
@@ -10,12 +12,12 @@ import {
 } from './styles';
 
 import { getIcon } from '@/helpers';
-import { useAppSelector } from '@/hooks';
+import { selectCurrentIcon, selectCurrentName, selectCurrentTemp } from '@/store/selectors';
 
 export const LeftSideInfo = () => {
-  const temp = useAppSelector(state => state.openWeatherReducer.currentData.main.temp);
-  const city = useAppSelector(state => state.openWeatherReducer.currentData.name);
-  const icon = useAppSelector(state => state.openWeatherReducer.currentData.weather[0].main);
+  const temp = useSelector(selectCurrentTemp);
+  const city = useSelector(selectCurrentName);
+  const icon = useSelector(selectCurrentIcon);
 
   return (
     <LeftSideInfoContainer>

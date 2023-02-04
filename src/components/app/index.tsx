@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
 import { AppContainer } from './styles';
@@ -10,15 +10,14 @@ import { Cards } from '@/components/cards';
 import { Header } from '@/components/header';
 import { Info } from '@/components/info';
 import { Spinner } from '@/components/spinner';
-import { useAppSelector } from '@/hooks';
 import { setAppError } from '@/store/actions';
 import { selectAppError, selectAppTheme, selectIsInitialized } from '@/store/selectors';
 import { GlobalStyles, theme } from '@/styles';
 
 export const App = () => {
-  const currentTheme = useAppSelector(selectAppTheme);
-  const isInitialized = useAppSelector(selectIsInitialized);
-  const error = useAppSelector(selectAppError);
+  const currentTheme = useSelector(selectAppTheme);
+  const isInitialized = useSelector(selectIsInitialized);
+  const error = useSelector(selectAppError);
 
   const dispatch = useDispatch();
 

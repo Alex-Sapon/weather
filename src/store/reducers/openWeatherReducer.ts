@@ -6,7 +6,7 @@ const initialState = {
   forecastData: {} as ForecastType,
 };
 
-export const openWeatherReducer = (state: StateType = initialState, action: ActionType): StateType => {
+export const weatherReducer = (state: StateType = initialState, action: ActionType): StateType => {
   switch (action.type) {
   case 'OPEN_WEATHER/SET_CURRENT_WEATHER_DATA':
     return { ...state, currentData: action.payload };

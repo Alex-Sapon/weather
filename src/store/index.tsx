@@ -2,11 +2,11 @@ import { applyMiddleware, combineReducers, compose, legacy_createStore as create
 import createSagaMiddleware from 'redux-saga';
 
 import { rootWatcher } from '@/sagas/rootSaga';
-import { appReducer, openWeatherReducer } from '@/store/reducers';
+import { appReducer, weatherReducer } from '@/store/reducers';
 
 const rootReducer = combineReducers({
   appReducer,
-  openWeatherReducer
+  weatherReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();

@@ -25,10 +25,14 @@ export const CardsControlLeft = styled.div`
 
 export const CardsItems = styled.div`
   padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 30px;
+  overflow-x: auto;
+  gap: 25px;
+  display: flex;
   border-radius: 20px;
   background-color: ${props => props.theme.color.backgroundSecondary};
   box-shadow: ${props => props.theme.boxShadow};
+
+  &::-webkit-scrollbar {
+    height: 0;
+  }
 `;

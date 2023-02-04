@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div`
   min-height: 200px;
+  min-width: 165px;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(6, auto-fill);
   row-gap: 5px;
   color: ${props => props.theme.color.textPrimary};
   background-color: ${props => props.theme.color.backgroundTertiary};

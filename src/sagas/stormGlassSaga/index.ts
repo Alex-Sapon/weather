@@ -15,7 +15,7 @@ function* loadCurrentData() {
       location.coords.longitude
     );
 
-    console.log(weather);
+    console.log(weather.data);
   } catch (error) {
     yield handleAppError(error as AxiosError);
   }
