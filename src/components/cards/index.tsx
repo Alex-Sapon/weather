@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { CardsContainer, CardsControlLeft, CardsControl, CardsItems } from './styles';
+
+import { CardsContainer, CardsControlLeft, CardsControl, CardsItems, SlideLeft, SlideRight } from './styles';
 
 import { Button } from '@/components/button';
 import { Card } from '@/components/card';
@@ -12,6 +13,16 @@ export const Cards = () => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   const list = useSelector(selectForecastList);
+
+  const slideLeft = () => {
+    const element = ref.current;
+    if (element) element.scrollLeft -= 500;
+  };
+
+  const slideRight = () => {
+    const element = ref.current;
+    if (element) element.scrollLeft += 500;
+  };
 
   useEffect(() => {
     const element = ref.current;
@@ -30,7 +41,7 @@ export const Cards = () => {
       return () => element.removeEventListener('wheel', onWheel);
     }
   }, []);
-  
+
   return (
     <CardsContainer>
       <CardsControl>
@@ -39,11 +50,13 @@ export const Cards = () => {
         </CardsControlLeft>
         <Button text='Отменить' handleClick={() => {}} />
       </CardsControl>
+      <SlideLeft onClick={slideLeft} />
       <CardsItems ref={ref}>
         {list.map(data =>
           <Card key={data.dt} props={data} />
         )}
       </CardsItems>
+      <SlideRight onClick={slideRight} />
     </CardsContainer>
   );
 };

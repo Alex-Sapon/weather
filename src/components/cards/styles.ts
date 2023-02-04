@@ -1,4 +1,6 @@
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import styled from 'styled-components';
+
 
 export const CardsControl = styled.div`
   margin-bottom: 20px;
@@ -6,7 +8,9 @@ export const CardsControl = styled.div`
   justify-content: space-between;
 `;
 
-export const CardsContainer = styled.div``;
+export const CardsContainer = styled.div`
+  position: relative;
+`;
 
 export const CardsControlLeft = styled.div`
   display: grid;
@@ -24,9 +28,11 @@ export const CardsControlLeft = styled.div`
 `;
 
 export const CardsItems = styled.div`
+  position: relative;
   padding: 20px;
   overflow-x: auto;
-  gap: 25px;
+  overflow-y: hidden;
+  gap: 20px;
   display: flex;
   border-radius: 20px;
   background-color: ${props => props.theme.color.backgroundSecondary};
@@ -35,4 +41,49 @@ export const CardsItems = styled.div`
   &::-webkit-scrollbar {
     height: 0;
   }
+`;
+
+export const SlideLeft = styled(MdChevronLeft)`
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  z-index: 100;
+  transition: all .3s ease;
+  color: ${props => props.theme.color.textPrimary};
+
+  &:hover {
+    color: ${props => props.theme.color.textPrimary};
+    background-color: rgba(255, 255, 255, 0.6)
+  }
+
+  @media (max-width: 479.98px) {
+    display: none;
+  }
+`;
+
+export const SlideRight = styled(MdChevronRight)`
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  z-index: 100;
+  transition: all .3s ease;
+  color: ${props => props.theme.color.textPrimary};
+
+  &:hover {
+    color: ${props => props.theme.color.textPrimary};
+    background-color: rgba(255, 255, 255, 0.6)
+  };
+
+  @media (max-width: 479.98px) {
+    display: none;
+  }
+}
 `;
