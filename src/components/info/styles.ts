@@ -10,4 +10,8 @@ export const InfoContainer = styled.div`
     grid-template-columns: 1fr;
     gap: 30px;
   }
+
+  @media (max-width: 767.98px) {
+    margin-bottom: 30px;
+  }
 `;

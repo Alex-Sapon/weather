@@ -3,9 +3,8 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 
-import { CardsContainer, CardsControlLeft, CardsControl, CardsItems, SlideLeft, SlideRight } from './styles';
+import { CardsContainer, CardsItems, CardsTitle, SlideLeft, SlideRight } from './styles';
 
-import { Button } from '@/components/button';
 import { Card } from '@/components/card';
 import { selectForecastList } from '@/store/selectors';
 
@@ -15,13 +14,11 @@ export const Cards = () => {
   const list = useSelector(selectForecastList);
 
   const slideLeft = () => {
-    const element = ref.current;
-    if (element) element.scrollLeft -= 500;
+    if (ref.current) ref.current.scrollLeft -= 500;
   };
 
   const slideRight = () => {
-    const element = ref.current;
-    if (element) element.scrollLeft += 500;
+    if (ref.current) ref.current.scrollLeft += 500;
   };
 
   useEffect(() => {
@@ -32,7 +29,7 @@ export const Cards = () => {
         event.preventDefault();
         element.scrollTo({
           left: element.scrollLeft + event.deltaY * 4,
-          behavior: 'smooth'
+          behavior: 'smooth',
         });
       };
 
@@ -44,16 +41,11 @@ export const Cards = () => {
 
   return (
     <CardsContainer>
-      <CardsControl>
-        <CardsControlLeft>
-          <Button text='На 4 дня' handleClick={() => {}} />
-        </CardsControlLeft>
-        <Button text='Отменить' handleClick={() => {}} />
-      </CardsControl>
-      <SlideLeft onClick={slideLeft} />
+      <CardsTitle>Погода на 4 дня</CardsTitle>
+      <SlideLeft onClick={slideLeft}/>
       <CardsItems ref={ref}>
         {list.map(data =>
-          <Card key={data.dt} props={data} />
+          <Card key={data.dt} props={data} />,
         )}
       </CardsItems>
       <SlideRight onClick={slideRight} />

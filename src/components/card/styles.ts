@@ -2,13 +2,16 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div`
   min-height: 200px;
-  min-width: 165px;
+  min-width: 140px;
   padding: 10px;
   display: grid;
+  grid-template-rows: 20px 20px 65px 20px minmax(20px, auto);
+  align-items: center;
   row-gap: 5px;
   color: ${props => props.theme.color.textPrimary};
   background-color: ${props => props.theme.color.backgroundTertiary};
   border-radius: 10px;
+  user-select: none;
 `;
 
 export const CardTextBold = styled.div`
@@ -21,6 +24,4 @@ export const CardTextLight = styled.div`
   color: ${props => props.theme.color.textSecondary};
 `;
 
-export const CardImage = styled.img`
-  margin: 8px 0;
-`;
+export const CardImage = styled.img``;

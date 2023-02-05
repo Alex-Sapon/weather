@@ -1,18 +1,19 @@
 import React, { ChangeEvent } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Control, HeaderContainer, Input, Logo, ThemeButton } from './styles';
 
 import LogoApp from '@/assets/icons/logo.svg';
 import ThemeLogo from '@/assets/icons/theme_logo.svg';
-import { useAppSelector } from '@/hooks';
+import { RadioGroup } from '@/components/radioGroup';
 import { changeTheme, setWeatherDataBasic, setWeatherDataCity } from '@/store/actions';
+import { selectAppTheme } from '@/store/selectors';
 
 export const Header = () => {
   const dispatch = useDispatch();
 
-  const currentTheme = useAppSelector(state => state.appReducer.theme);
+  const currentTheme = useSelector(selectAppTheme);
 
   const onSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
@@ -21,7 +22,7 @@ export const Header = () => {
     else dispatch(setWeatherDataBasic());
   };
   
-  const onChangeThemeClick = () => {
+  const onChangeTheme = () => {
     dispatch(changeTheme(currentTheme === 'light' ? 'dark' : 'light'));
   };
 
@@ -29,7 +30,8 @@ export const Header = () => {
     <HeaderContainer>
       <Logo src={LogoApp} alt='Logo' />
       <Control>
-        <ThemeButton src={ThemeLogo} onClick={onChangeThemeClick}/>
+        <RadioGroup />
+        <ThemeButton src={ThemeLogo} onClick={onChangeTheme}/>
         <Input
           placeholder='Выбрать город'
           onChange={onSearch}

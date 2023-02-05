@@ -12,6 +12,11 @@
   ],
   "parserOptions": { "project": "./tsconfig.json" },
   "rules": {
+    "jsx-a11y/label-has-associated-control": ["error", {
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }],
     "func-names": ["error", "never"],
     "consistent-return": "off",
     "quotes": "off",

@@ -1,45 +1,30 @@
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import styled from 'styled-components';
 
-
-export const CardsControl = styled.div`
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-`;
-
 export const CardsContainer = styled.div`
   position: relative;
 `;
 
-export const CardsControlLeft = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 20px;
-  margin-right: 20px;
-
-  @media (max-width: 767.98px) {
-    grid-template-columns: repeat(2, auto);
-  }
-
-  @media (max-width: 479.98px) {
-    grid-template-columns: repeat(1, auto);
-  }
+export const CardsTitle = styled.h2`
+  color: ${props => props.theme.color.textPrimary};
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 20px;
 `;
 
 export const CardsItems = styled.div`
-  position: relative;
   padding: 20px;
   overflow-x: auto;
   overflow-y: hidden;
   gap: 20px;
   display: flex;
   border-radius: 20px;
+  scroll-behavior: smooth;
   background-color: ${props => props.theme.color.backgroundSecondary};
   box-shadow: ${props => props.theme.boxShadow};
 
   &::-webkit-scrollbar {
-    height: 0;
+    display: none;
   }
 `;
 
@@ -56,7 +41,7 @@ export const SlideLeft = styled(MdChevronLeft)`
   color: ${props => props.theme.color.textPrimary};
 
   &:hover {
-    color: ${props => props.theme.color.textPrimary};
+    color: #000;
     background-color: rgba(255, 255, 255, 0.6)
   }
 
@@ -78,9 +63,9 @@ export const SlideRight = styled(MdChevronRight)`
   color: ${props => props.theme.color.textPrimary};
 
   &:hover {
-    color: ${props => props.theme.color.textPrimary};
+    color: #000;
     background-color: rgba(255, 255, 255, 0.6)
-  };
+  }
 
   @media (max-width: 479.98px) {
     display: none;
