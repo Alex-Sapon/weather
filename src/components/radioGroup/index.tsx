@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { useDispatch } from 'react-redux';
 
 import { RadioInput, Form, Span } from './styles';
 
+import { setStormGlassDataBasic } from '@/store/actions';
+
 export const RadioGroup = () => {
+  const [apiName, setApiName] = useState('openWeather');
+  
+  const dispatch = useDispatch();
+
   const onChangeApi = () => {
-    
+    setApiName(apiName === 'openWeather' ? 'stormGlass' : 'openWeather');
   };
+
+  useEffect(() => {
+    if (apiName === 'stormGlass') dispatch(setStormGlassDataBasic());
+  }, [apiName]);
   
   return (
     <Form action="#">
@@ -14,8 +26,7 @@ export const RadioGroup = () => {
           onChange={onChangeApi} 
           type="radio" 
           id="openWeather"
-          name="radio-group"
-          checked 
+          checked={apiName === 'openWeather'}
         />
         <label htmlFor="openWeather">openWeather</label>
       </Span>
@@ -24,7 +35,7 @@ export const RadioGroup = () => {
           onChange={onChangeApi} 
           type="radio" 
           id="stormGlass"
-          name="radio-group" 
+          checked={apiName === 'stormGlass'}
         />
         <label htmlFor="stormGlass">stormGlass</label>
       </Span>

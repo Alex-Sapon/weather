@@ -33,3 +33,7 @@ export const setWeatherDataCity = (city: string) => ({
   type: 'LOAD_WEATHER_CITY_DATA',
   payload: city
 } as const);
+
+export const setStormGlassDataBasic = () => ({
+  type: 'LOAD_STORM_GLASS_DATA_BASIC',
+} as const);
