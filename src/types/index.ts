@@ -126,3 +126,16 @@ export interface Wind {
   speed: number;
   deg: number;
 }
+
+export type CurrentWeatherType = {
+  temp: number
+  iconName: string
+  description: string
+  city: string
+  feelsLike: number
+  pressure: number
+  wind: number
+  date: number | Date
+}
+
+export type ForecastWeatherType = Omit<CurrentWeatherType, 'city' | 'feelsLike' | 'pressure' | 'wind'>;

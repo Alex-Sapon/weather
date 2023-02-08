@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import { useSelector } from 'react-redux';
-
+import { v1 } from 'uuid';
 
 import { CardsContainer, CardsItems, CardsTitle, SlideLeft, SlideRight } from './styles';
 
@@ -44,8 +44,14 @@ export const Cards = () => {
       <CardsTitle>Погода на 4 дня</CardsTitle>
       <SlideLeft onClick={slideLeft}/>
       <CardsItems ref={ref}>
-        {list.map(data =>
-          <Card key={data.dt} props={data} />,
+        {list.map(({ description, date, temp, iconName }) =>
+          <Card
+            key={v1()}
+            description={description}
+            date={date}
+            iconName={iconName}
+            temp={temp}
+          />,
         )}
       </CardsItems>
       <SlideRight onClick={slideRight} />

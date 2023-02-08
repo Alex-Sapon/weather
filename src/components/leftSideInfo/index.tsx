@@ -12,11 +12,11 @@ import {
 } from './styles';
 
 import { getIcon } from '@/helpers';
-import { selectCurrentIcon, selectCurrentName, selectCurrentTemp } from '@/store/selectors';
+import { selectCurrentIcon, selectCurrentCity, selectCurrentTemp } from '@/store/selectors';
 
 export const LeftSideInfo = () => {
   const temp = useSelector(selectCurrentTemp);
-  const city = useSelector(selectCurrentName);
+  const city = useSelector(selectCurrentCity);
   const icon = useSelector(selectCurrentIcon);
 
   return (

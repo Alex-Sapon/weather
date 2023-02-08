@@ -25,8 +25,22 @@ function* loadCurrentData() {
     weather.data.id
   );
 
-  yield put(setWeatherCurrentData(weather.data));
-  yield put(setWeatherForecastData(forecast.data));
+  yield put(setWeatherCurrentData({
+    date: weather.data.dt,
+    city: weather.data.name,
+    description: weather.data.weather[0].description,
+    feelsLike: weather.data.main.feels_like,
+    iconName: weather.data.weather[0].main,
+    temp: weather.data.main.temp,
+    wind: weather.data.wind.speed,
+    pressure: weather.data.main.pressure,
+  }));
+  yield put(setWeatherForecastData(forecast.data.list.map(data => ({
+    date: data.dt_txt,
+    temp: data.main.temp,
+    iconName: data.weather[0].main,
+    description: data.weather[0].description,
+  }))));
   yield put(setInitialize(true));
 }
 
@@ -41,8 +55,22 @@ export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDat
     weather.data.id
   );
 
-  yield put(setWeatherCurrentData(weather.data));
-  yield put(setWeatherForecastData(forecast.data));
+  yield put(setWeatherCurrentData({
+    date: weather.data.dt,
+    city: weather.data.name,
+    description: weather.data.weather[0].description,
+    feelsLike: weather.data.main.feels_like,
+    iconName: weather.data.weather[0].main,
+    temp: weather.data.main.temp,
+    wind: weather.data.wind.speed,
+    pressure: weather.data.main.pressure,
+  }));
+  yield put(setWeatherForecastData(forecast.data.list.map(data => ({
+    date: data.dt_txt,
+    temp: data.main.temp,
+    iconName: data.weather[0].main,
+    description: data.weather[0].description,
+  }))));
 }
 
 export function* watchOpenWeather() {

@@ -3,7 +3,7 @@ import { all, call, spawn } from 'redux-saga/effects';
 
 import { handleAppError } from '@/helpers';
 import { watchOpenWeather } from '@/sagas/openWeatherSaga';
-import { stormGlassWatcher } from '@/sagas/stormGlassSaga';
+import { stormGlassWatcher } from '@/sagas/rapidSaga';
 
 export function* rootWatcher() {
   const sagas = [watchOpenWeather, stormGlassWatcher];

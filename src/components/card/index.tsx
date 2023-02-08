@@ -1,28 +1,24 @@
 import React from 'react';
 
-import { CardContainer, CardTextBold, CardImage, CardTextLight } from './styles';
+import { CardContainer, CardImage, CardTextBold, CardTextLight } from './styles';
 
 import { getIcon } from '@/helpers';
-import { DayOfForecast } from '@/types';
+import { ForecastWeatherType } from '@/types';
 
-type CardProps = {
-  props: DayOfForecast
-}
-
-export const Card = ({ props }: CardProps) => (
+export const Card = ({ temp, description, date, iconName }: ForecastWeatherType) => (
   <CardContainer>
     <CardTextBold>
-      {new Date(props!.dt_txt).toLocaleString().slice(0, 10)}
+      {new Date(date).toLocaleString().slice(0, 10)}
     </CardTextBold>
     <CardTextLight>
-      {new Date(props!.dt_txt).toLocaleString().slice(11, -3)}
+      {new Date(date).toLocaleString().slice(11, -3)}
     </CardTextLight>
-    <CardImage src={getIcon(props!.weather[0]!.main)}/>
+    <CardImage src={getIcon(iconName)}/>
     <CardTextBold>
-      {Math.round(props!.main.temp_max!)}&deg;
+      {Math.round(temp)}&deg;
     </CardTextBold>
     <CardTextLight>
-      {props!.weather[0].description}
+      {description}
     </CardTextLight>
   </CardContainer>
 );
