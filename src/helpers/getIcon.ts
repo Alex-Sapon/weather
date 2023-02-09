@@ -14,6 +14,6 @@ export const getIcon = (name: string) => {
   case 'Clear': return Sun;
   case 'Snow': return Snow;
   // case 'Clouds': return MainlyCloudy;
-  default: return null;
+  default: return name;
   }
 };

@@ -129,7 +129,7 @@ export interface Wind {
 
 export type CurrentWeatherType = {
   temp: number
-  iconName: string
+  icon: string
   description: string
   city: string
   feelsLike: number

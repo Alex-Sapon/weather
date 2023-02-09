@@ -12,4 +12,4 @@ export const selectCurrentFeelsLike = (state: RootState) => state.weatherReducer
 export const selectCurrentPressure = (state: RootState) => state.weatherReducer.currentWeather.pressure;
 export const selectCurrentSpeed = (state: RootState) => state.weatherReducer.currentWeather.wind;
 export const selectCurrentDesc = (state: RootState) => state.weatherReducer.currentWeather.description;
-export const selectCurrentIcon = (state: RootState) => state.weatherReducer.currentWeather.iconName;
+export const selectCurrentIcon = (state: RootState) => state.weatherReducer.currentWeather.icon;

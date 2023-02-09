@@ -5,7 +5,7 @@ import { CardContainer, CardImage, CardTextBold, CardTextLight } from './styles'
 import { getIcon } from '@/helpers';
 import { ForecastWeatherType } from '@/types';
 
-export const Card = ({ temp, description, date, iconName }: ForecastWeatherType) => (
+export const Card = ({ temp, description, date, icon }: ForecastWeatherType) => (
   <CardContainer>
     <CardTextBold>
       {new Date(date).toLocaleString().slice(0, 10)}
@@ -13,7 +13,7 @@ export const Card = ({ temp, description, date, iconName }: ForecastWeatherType)
     <CardTextLight>
       {new Date(date).toLocaleString().slice(11, -3)}
     </CardTextLight>
-    <CardImage src={getIcon(iconName)}/>
+    <CardImage src={getIcon(icon)}/>
     <CardTextBold>
       {Math.round(temp)}&deg;
     </CardTextBold>

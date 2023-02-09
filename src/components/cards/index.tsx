@@ -44,12 +44,12 @@ export const Cards = () => {
       <CardsTitle>Погода на 4 дня</CardsTitle>
       <SlideLeft onClick={slideLeft}/>
       <CardsItems ref={ref}>
-        {list.map(({ description, date, temp, iconName }) =>
+        {list.map(({ description, date, temp, icon }) =>
           <Card
             key={v1()}
             description={description}
             date={date}
-            iconName={iconName}
+            icon={icon}
             temp={temp}
           />,
         )}

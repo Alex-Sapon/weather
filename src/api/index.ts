@@ -1,2 +1,2 @@
 export { apiOpenWeather } from './openweather';
-export { apiStormGlass } from './rapid';
+export { apiRapid } from './rapid';

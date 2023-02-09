@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
 import { RadioInput, Form, Span } from './styles';
 
-import { setStormGlassDataBasic } from '@/store/actions';
+import { setStormGlassDataBasic, setWeatherDataBasic } from '@/store/actions';
 
 export const RadioGroup = () => {
   const [apiName, setApiName] = useState('openWeather');
   
   const dispatch = useDispatch();
 
-  const onChangeApi = () => {
-    setApiName(apiName === 'openWeather' ? 'stormGlass' : 'openWeather');
-  };
+  const onChangeApi = (event: ChangeEvent) => setApiName(event.target.id);
 
   useEffect(() => {
     if (apiName === 'stormGlass') dispatch(setStormGlassDataBasic());
+    if (apiName === 'openWeather') dispatch(setWeatherDataBasic());
   }, [apiName]);
   
   return (

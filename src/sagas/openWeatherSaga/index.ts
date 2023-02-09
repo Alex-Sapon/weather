@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { call, debounce, fork, put } from 'redux-saga/effects';
+import { call, debounce, fork, put, takeEvery } from 'redux-saga/effects';
 
 import { apiOpenWeather } from '@/api';
 import { getUserLocation } from '@/helpers';
@@ -30,7 +30,7 @@ function* loadCurrentData() {
     city: weather.data.name,
     description: weather.data.weather[0].description,
     feelsLike: weather.data.main.feels_like,
-    iconName: weather.data.weather[0].main,
+    icon: weather.data.weather[0].main,
     temp: weather.data.main.temp,
     wind: weather.data.wind.speed,
     pressure: weather.data.main.pressure,
@@ -38,7 +38,7 @@ function* loadCurrentData() {
   yield put(setWeatherForecastData(forecast.data.list.map(data => ({
     date: data.dt_txt,
     temp: data.main.temp,
-    iconName: data.weather[0].main,
+    icon: data.weather[0].main,
     description: data.weather[0].description,
   }))));
   yield put(setInitialize(true));
@@ -60,7 +60,7 @@ export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDat
     city: weather.data.name,
     description: weather.data.weather[0].description,
     feelsLike: weather.data.main.feels_like,
-    iconName: weather.data.weather[0].main,
+    icon: weather.data.weather[0].main,
     temp: weather.data.main.temp,
     wind: weather.data.wind.speed,
     pressure: weather.data.main.pressure,
@@ -68,12 +68,13 @@ export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDat
   yield put(setWeatherForecastData(forecast.data.list.map(data => ({
     date: data.dt_txt,
     temp: data.main.temp,
-    iconName: data.weather[0].main,
+    icon: data.weather[0].main,
     description: data.weather[0].description,
   }))));
 }
 
 export function* watchOpenWeather() {
   yield fork(loadCurrentData);
+  yield takeEvery('LOAD_WEATHER_DATA_BASIC', loadCurrentData);
   yield debounce(600, 'LOAD_WEATHER_CITY_DATA', loadOpenWeatherCityData);
 }

@@ -21,15 +21,11 @@ export const LeftSideInfo = () => {
 
   return (
     <LeftSideInfoContainer>
-      <LeftSideTemperature>
-        {Math.round(temp)}&deg;
-      </LeftSideTemperature>
+      <LeftSideTemperature>{Math.round(temp)}&deg;</LeftSideTemperature>
       <LeftSideDay>Сегодня</LeftSideDay>
-      <LeftSideWeather src={getIcon(icon)}/>
-      <LeftSideTime>
-        Дата: {new Date().toLocaleDateString()}
-      </LeftSideTime>
+      <LeftSideWeather src={getIcon(icon)} />
+      <LeftSideTime>Дата: {new Date().toLocaleDateString()}</LeftSideTime>
       <LeftSideCity>Город: {city}</LeftSideCity>
-    </ LeftSideInfoContainer>
+    </LeftSideInfoContainer>
   );
 };
