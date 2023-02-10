@@ -13,7 +13,7 @@ function* loadCurrentData() {
       apiRapid.fetchWeather,
       location.coords.latitude,
       location.coords.longitude,
-      '2023-02-09,2023-02-13'
+      '2023-02-15'
       // `${(new Date()).toISOString().split('T')[0].slice(0, -2)}${new Date().getDate() + 4}`
     );
 

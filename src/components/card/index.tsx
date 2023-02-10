@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CardContainer, CardImage, CardTextBold, CardTextLight } from './styles';
 
-import { getIcon } from '@/helpers';
+import { getIconUrl } from '@/helpers/getIconUrl';
 import { ForecastWeatherType } from '@/types';
 
 export const Card = ({ temp, description, date, icon }: ForecastWeatherType) => (
@@ -13,7 +13,7 @@ export const Card = ({ temp, description, date, icon }: ForecastWeatherType) => 
     <CardTextLight>
       {new Date(date).toLocaleString().slice(11, -3)}
     </CardTextLight>
-    <CardImage src={getIcon(icon)}/>
+    <CardImage src={getIconUrl(icon)}/>
     <CardTextBold>
       {Math.round(temp)}&deg;
     </CardTextBold>

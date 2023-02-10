@@ -30,7 +30,7 @@ function* loadCurrentData() {
     city: weather.data.name,
     description: weather.data.weather[0].description,
     feelsLike: weather.data.main.feels_like,
-    icon: weather.data.weather[0].main,
+    icon: weather.data.weather[0].icon,
     temp: weather.data.main.temp,
     wind: weather.data.wind.speed,
     pressure: weather.data.main.pressure,
@@ -38,7 +38,7 @@ function* loadCurrentData() {
   yield put(setWeatherForecastData(forecast.data.list.map(data => ({
     date: data.dt_txt,
     temp: data.main.temp,
-    icon: data.weather[0].main,
+    icon: data.weather[0].icon,
     description: data.weather[0].description,
   }))));
   yield put(setInitialize(true));
