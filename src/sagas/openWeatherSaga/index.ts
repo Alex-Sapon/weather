@@ -9,12 +9,12 @@ import {
   setWeatherCurrentData,
   setWeatherForecastData,
 } from '@/store/actions';
-import { OpenWeather, ForecastType } from '@/types';
+import { CurrentWeather, ForecastType } from '@/types';
 
 function* loadCurrentData() {
   const location: GeolocationPosition = yield call(getUserLocation);
 
-  const weather: AxiosResponse<OpenWeather.RootData> = yield call(
+  const weather: AxiosResponse<CurrentWeather> = yield call(
     apiOpenWeather.fetchWeatherCurrent,
     location.coords.latitude,
     location.coords.longitude,
@@ -36,7 +36,7 @@ function* loadCurrentData() {
     pressure: weather.data.main.pressure,
   }));
   yield put(setWeatherForecastData(forecast.data.list.map(data => ({
-    date: data.dt_txt,
+    date: data.dt,
     temp: data.main.temp,
     icon: data.weather[0].icon,
     description: data.weather[0].description,
@@ -45,7 +45,7 @@ function* loadCurrentData() {
 }
 
 export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDataCity>) {
-  const weather: AxiosResponse<OpenWeather.RootData> = yield call(
+  const weather: AxiosResponse<CurrentWeather> = yield call(
     apiOpenWeather.fetchWeatherCity,
     action.payload,
   );
@@ -66,7 +66,7 @@ export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDat
     pressure: weather.data.main.pressure,
   }));
   yield put(setWeatherForecastData(forecast.data.list.map(data => ({
-    date: data.dt_txt,
+    date: data.dt,
     temp: data.main.temp,
     icon: data.weather[0].main,
     description: data.weather[0].description,

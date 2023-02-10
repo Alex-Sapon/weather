@@ -2,16 +2,16 @@ import React from 'react';
 
 import { CardContainer, CardImage, CardTextBold, CardTextLight } from './styles';
 
-import { getIconUrl } from '@/helpers/getIconUrl';
+import { getIconUrl, convertUnixTimeToDate } from '@/helpers';
 import { ForecastWeatherType } from '@/types';
 
 export const Card = ({ temp, description, date, icon }: ForecastWeatherType) => (
   <CardContainer>
     <CardTextBold>
-      {new Date(date).toLocaleString().slice(0, 10)}
+      {convertUnixTimeToDate(date).toLocaleDateString()}
     </CardTextBold>
     <CardTextLight>
-      {new Date(date).toLocaleString().slice(11, -3)}
+      {convertUnixTimeToDate(date).toLocaleTimeString().slice(0, -3)}
     </CardTextLight>
     <CardImage src={getIconUrl(icon)}/>
     <CardTextBold>

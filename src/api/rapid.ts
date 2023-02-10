@@ -1,12 +1,8 @@
-import axios, { AxiosResponse } from 'axios';
-
-const API_KEY = process.env.REACT_APP_RAPID_API_KEY;
-
-const baseURL = 'https://weatherapi-com.p.rapidapi.com/forecast.json';
+import axios from 'axios';
 
 const options = (lat: number, lon: number, date?: string) => ({
   method: 'GET',
-  url: baseURL,
+  url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
   params: {
     q: `${lat},${lon}`,
     days: 4,
@@ -14,13 +10,13 @@ const options = (lat: number, lon: number, date?: string) => ({
     lang: 'ru',
   },
   headers: {
-    'X-RapidAPI-Key': API_KEY,
+    'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
     'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
   },
 });
 
 export const apiRapid = {
-  fetchWeather(lat: number, lon: number, date: string): Promise<AxiosResponse<RapidWeather>> {
+  fetchWeather(lat: number, lon: number, date: string): Promise<RapidWeather> {
     return axios.request(options(lat, lon, date));
   },
 };

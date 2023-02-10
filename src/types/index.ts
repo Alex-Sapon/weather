@@ -1,68 +1,43 @@
-// current weather
-export declare module OpenWeather {
-  export interface Coordinates {
-    lon: number;
-    lat: number;
-  }
-
-  export interface Weather {
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }
-
-  export interface Main {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
-    sea_level: number;
-    grnd_level: number;
-  }
-
-  export interface Wind {
-    speed: number;
-    deg: number;
-    gust: number;
-  }
-
-  export interface Rain {
-    id: number;
-  }
-
-  export interface Clouds {
-    all: number;
-  }
-
-  export interface Sys {
-    type: number;
-    id: number;
-    country: string;
-    sunrise: number;
-    sunset: number;
-  }
-
-  export interface RootData {
-    coordinates: Coordinates;
-    weather: Weather[];
-    base: string;
-    main: Main;
-    visibility: number;
-    wind: Wind;
-    rain: Rain;
-    clouds: Clouds;
-    dt: number;
-    sys: Sys;
-    timezone: number;
-    id: number;
-    name: string;
-    cod: number;
-  }
+// OpenWeatherCurrent
+export interface CurrentWeather {
+  coordinates: Coordinates;
+  weather: WeatherConditions[];
+  main: MainWeatherData;
+  wind: WindInfo;
+  dt: number;
+  id: number;
+  name: string;
+  cod: number;
 }
 
+export interface Coordinates {
+  lon: number;
+  lat: number;
+}
+
+export interface WeatherConditions {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
+export interface MainWeatherData {
+  temp: number;
+  feels_like: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
+  humidity: number;
+  sea_level: number;
+  grnd_level: number;
+}
+
+export interface WindInfo {
+  speed: number;
+  deg: number;
+  gust: number;
+}
 
 // OpenWeatherForecast
 export interface ForecastType {
@@ -76,7 +51,7 @@ export interface ForecastType {
 export interface City {
   id: number;
   name: string;
-  coord: OpenWeather.Coordinates;
+  coord: Coordinates;
   country: string;
 }
 
@@ -135,7 +110,7 @@ export type CurrentWeatherType = {
   feelsLike: number
   pressure: number
   wind: number
-  date: number | Date
+  date: number
 }
 
 export type ForecastWeatherType = Omit<CurrentWeatherType, 'city' | 'feelsLike' | 'pressure' | 'wind'>;
