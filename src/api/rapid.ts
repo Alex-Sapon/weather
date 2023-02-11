@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-const options = (lat: number, lon: number, date?: string) => ({
+const options = (city: string, lat?: number, lon?: number) => ({
   method: 'GET',
   url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
   params: {
-    q: `${lat},${lon}`,
-    days: 4,
-    dt: date,
+    q: city ?? `${lat},${lon}`,
+    days: '4',
     lang: 'ru',
   },
   headers: {
@@ -16,8 +15,11 @@ const options = (lat: number, lon: number, date?: string) => ({
 });
 
 export const apiRapid = {
-  fetchWeather(lat: number, lon: number, date: string): Promise<RapidWeather> {
-    return axios.request(options(lat, lon, date));
+  fetchWeather(lat: number, lon: number): Promise<RapidWeather> {
+    return axios.request(options('', lat, lon));
+  },
+  fetchWeatherWithCity(city: string): Promise<RapidWeather> {
+    return axios.request(options(city));
   },
 };
 

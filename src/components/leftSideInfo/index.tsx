@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import {
   LeftSideInfoContainer,
-  LeftSideWeather,
+  LeftSideImage,
   LeftSideTemperature,
   LeftSideDay,
   LeftSideTime,
@@ -23,7 +23,7 @@ export const LeftSideInfo = () => {
     <LeftSideInfoContainer>
       <LeftSideTemperature>{Math.round(temp)}&deg;</LeftSideTemperature>
       <LeftSideDay>Сегодня</LeftSideDay>
-      <LeftSideWeather src={getIconUrl(icon)} />
+      <LeftSideImage src={getIconUrl(icon)} />
       <LeftSideTime>Дата: {new Date().toLocaleDateString()}</LeftSideTime>
       <LeftSideCity>Город: {city}</LeftSideCity>
     </LeftSideInfoContainer>

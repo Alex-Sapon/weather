@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, debounce, put, takeEvery } from 'redux-saga/effects';
 
 import { apiRapid, RapidWeather } from '@/api/rapid';
 import { getUserLocation, handleAppError } from '@/helpers';
@@ -13,8 +13,6 @@ function* loadCurrentData() {
       apiRapid.fetchWeather,
       location.coords.latitude,
       location.coords.longitude,
-      '2023-02-15'
-      // `${(new Date()).toISOString().split('T')[0].slice(0, -2)}${new Date().getDate() + 4}`
     );
 
     yield put(setWeatherCurrentData({
@@ -24,7 +22,7 @@ function* loadCurrentData() {
       feelsLike: weather.data.current.feelslike_c,
       icon: weather.data.current.condition.icon,
       temp: weather.data.current.temp_c,
-      wind: weather.data.current.wind_kph,
+      wind: Math.round(weather.data.current.wind_kph / 3.6),
       pressure: weather.data.current.pressure_mb,
     }));
     yield put(setWeatherForecastData(weather.data.forecast.forecastday.map(data => ({
@@ -39,5 +37,6 @@ function* loadCurrentData() {
 }
 
 export function* stormGlassWatcher() {
-  yield takeEvery('LOAD_STORM_GLASS_DATA_BASIC', loadCurrentData);
+  yield takeEvery('LOAD_RAPID_DATA_BASIC', loadCurrentData);
+  yield debounce(600, '', loadCurrentData);
 }

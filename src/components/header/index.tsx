@@ -21,7 +21,7 @@ export const Header = () => {
     if (value) dispatch(setWeatherDataCity(value));
     else dispatch(setWeatherDataBasic());
   };
-  
+
   const onChangeTheme = () => {
     dispatch(changeTheme(currentTheme === 'light' ? 'dark' : 'light'));
   };
@@ -31,11 +31,8 @@ export const Header = () => {
       <Logo src={LogoApp} alt='Logo' />
       <Control>
         <RadioGroup />
-        <ThemeButton src={ThemeLogo} onClick={onChangeTheme}/>
-        <Input
-          placeholder='Выбрать город'
-          onChange={onSearch}
-        />
+        <ThemeButton src={ThemeLogo} onClick={onChangeTheme} />
+        <Input placeholder='Выбрать город' onChange={onSearch} />
       </Control>
     </HeaderContainer>
   );

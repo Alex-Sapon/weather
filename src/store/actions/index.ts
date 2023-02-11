@@ -30,10 +30,10 @@ export const setWeatherDataBasic = () => ({
 } as const);
 
 export const setWeatherDataCity = (city: string) => ({
-  type: 'LOAD_WEATHER_CITY_DATA',
+  type: 'LOAD_WEATHER_DATA_CITY',
   payload: city
 } as const);
 
-export const setStormGlassDataBasic = () => ({
-  type: 'LOAD_STORM_GLASS_DATA_BASIC',
+export const setRapidDataBasic = () => ({
+  type: 'LOAD_RAPID_DATA_BASIC',
 } as const);

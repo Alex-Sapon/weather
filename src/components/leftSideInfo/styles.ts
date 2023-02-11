@@ -41,15 +41,12 @@ export const LeftSideDay = styled.div`
   }
 `;
 
-export const LeftSideWeather = styled.img`
-  height: 70%;
+export const LeftSideImage = styled.img`
+  height: 85%;
+  object-fit: contain;
   align-self: flex-start;
   justify-self: right;
   grid-area: 1 / 2 / 3 / 3;
-
-  @media (max-width: 479.98px) {
-    height: 60%;
-  }
 `;
 
 export const LeftSideTime = styled.div`

@@ -40,7 +40,7 @@ export interface WindInfo {
 }
 
 // OpenWeatherForecast
-export interface ForecastType {
+export interface ForecastWeather {
   cod: string;
   message: number;
   cnt: number;

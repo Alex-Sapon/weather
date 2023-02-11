@@ -2,9 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { RadioInput, Form, Span } from './styles';
+import { RadioInput, Container, Span } from './styles';
 
-import { setStormGlassDataBasic, setWeatherDataBasic } from '@/store/actions';
+import { setRapidDataBasic, setWeatherDataBasic } from '@/store/actions';
 
 export const RadioGroup = () => {
   const [apiName, setApiName] = useState('openWeather');
@@ -14,12 +14,12 @@ export const RadioGroup = () => {
   const onChangeApi = (event: ChangeEvent) => setApiName(event.target.id);
 
   useEffect(() => {
-    if (apiName === 'stormGlass') dispatch(setStormGlassDataBasic());
+    if (apiName === 'rapidWeather') dispatch(setRapidDataBasic());
     if (apiName === 'openWeather') dispatch(setWeatherDataBasic());
   }, [apiName]);
   
   return (
-    <Form action="#">
+    <Container>
       <Span>
         <RadioInput 
           onChange={onChangeApi} 
@@ -33,11 +33,11 @@ export const RadioGroup = () => {
         <RadioInput
           onChange={onChangeApi} 
           type="radio" 
-          id="stormGlass"
-          checked={apiName === 'stormGlass'}
+          id="rapidWeather"
+          checked={apiName === 'rapidWeather'}
         />
-        <label htmlFor="stormGlass">stormGlass</label>
+        <label htmlFor="rapidWeather">rapidWeather</label>
       </Span>
-    </Form>
+    </Container>
   );
 };

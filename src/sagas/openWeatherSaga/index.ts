@@ -9,7 +9,7 @@ import {
   setWeatherCurrentData,
   setWeatherForecastData,
 } from '@/store/actions';
-import { CurrentWeather, ForecastType } from '@/types';
+import { CurrentWeather, ForecastWeather } from '@/types';
 
 function* loadCurrentData() {
   const location: GeolocationPosition = yield call(getUserLocation);
@@ -20,8 +20,8 @@ function* loadCurrentData() {
     location.coords.longitude,
   );
 
-  const forecast: AxiosResponse<ForecastType> = yield call(
-    apiOpenWeather.fetchForecastDays,
+  const forecast: AxiosResponse<ForecastWeather> = yield call(
+    apiOpenWeather.fetchWeatherForecast,
     weather.data.id
   );
 
@@ -44,14 +44,14 @@ function* loadCurrentData() {
   yield put(setInitialize(true));
 }
 
-export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDataCity>) {
+export function* loadOpenWeatherWithCity(action: ReturnType<typeof setWeatherDataCity>) {
   const weather: AxiosResponse<CurrentWeather> = yield call(
     apiOpenWeather.fetchWeatherCity,
     action.payload,
   );
 
-  const forecast: AxiosResponse<ForecastType> = yield call(
-    apiOpenWeather.fetchForecastDays,
+  const forecast: AxiosResponse<ForecastWeather> = yield call(
+    apiOpenWeather.fetchWeatherForecast,
     weather.data.id
   );
 
@@ -60,7 +60,7 @@ export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDat
     city: weather.data.name,
     description: weather.data.weather[0].description,
     feelsLike: weather.data.main.feels_like,
-    icon: weather.data.weather[0].main,
+    icon: weather.data.weather[0].icon,
     temp: weather.data.main.temp,
     wind: weather.data.wind.speed,
     pressure: weather.data.main.pressure,
@@ -68,7 +68,7 @@ export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDat
   yield put(setWeatherForecastData(forecast.data.list.map(data => ({
     date: data.dt,
     temp: data.main.temp,
-    icon: data.weather[0].main,
+    icon: data.weather[0].icon,
     description: data.weather[0].description,
   }))));
 }
@@ -76,5 +76,5 @@ export function* loadOpenWeatherCityData(action: ReturnType<typeof setWeatherDat
 export function* watchOpenWeather() {
   yield fork(loadCurrentData);
   yield takeEvery('LOAD_WEATHER_DATA_BASIC', loadCurrentData);
-  yield debounce(600, 'LOAD_WEATHER_CITY_DATA', loadOpenWeatherCityData);
+  yield debounce(600, 'LOAD_WEATHER_DATA_CITY', loadOpenWeatherWithCity);
 }

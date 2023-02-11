@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div`
   min-height: 200px;
-  min-width: 140px;
-  max-width: 140px;
+  min-width: 145px;
+  max-width: 145px;
   padding: 10px;
   display: grid;
   grid-template-rows: 20px 20px 65px 20px minmax(20px, auto);

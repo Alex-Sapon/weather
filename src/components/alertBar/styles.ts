@@ -10,13 +10,17 @@ export const AlertBarContainer = styled.div`
   grid-template-columns: auto 1fr;
   z-index: 900;
   font-size: 20px;
-  width: 40%;
+  width: 60%;
   color: ${props => props.theme.color.textPrimary};
   background-color: ${props => props.theme.color.backgroundTertiary};
   left: 5%;
   bottom: 5%;
   padding: 15px 10px;
   -webkit-box-shadow: 0 3px 9px 2px rgba(34, 60, 80, .1);
+
+  @media (max-width: 767.98px) {
+    width: 90%;
+  }
 `;
 
 export const AlertBarContent = styled.div``;
