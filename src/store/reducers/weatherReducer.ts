@@ -1,4 +1,4 @@
-import { setWeatherCurrentData, setWeatherForecastData } from '@/store/actions';
+import { setOpenWeatherDataCity, setWeatherData } from '@/store/actions';
 import { ForecastWeatherType, CurrentWeatherType } from '@/types';
 
 const initialState = {
@@ -8,10 +8,12 @@ const initialState = {
 
 export const weatherReducer = (state: StateType = initialState, action: ActionType): StateType => {
   switch (action.type) {
-  case 'OPEN_WEATHER/SET_CURRENT_WEATHER_DATA':
-    return { ...state, currentWeather: action.payload };
-  case 'OPEN_WEATHER/SET_FORECAST_WEATHER_DATA':
-    return { ...state, forecastWeather: action.payload };
+  case 'OPEN_WEATHER/SET_WEATHER_DATA':
+    return {
+      ...state,
+      currentWeather: action.payload.current,
+      forecastWeather: action.payload.forecast
+    };
   default:
     return state;
   }
@@ -23,6 +25,5 @@ type StateType = {
 }
 
 type ActionType =
-  | ReturnType<typeof setWeatherCurrentData>
-  | ReturnType<typeof setWeatherForecastData>;
-
+  | ReturnType<typeof setWeatherData>
+  | ReturnType<typeof setOpenWeatherDataCity>;

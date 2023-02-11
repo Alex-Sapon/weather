@@ -5,14 +5,12 @@ export const changeTheme = (value: string) => ({
   payload: value,
 } as const);
 
-export const setWeatherCurrentData = (data: CurrentWeatherType) => ({
-  type: 'OPEN_WEATHER/SET_CURRENT_WEATHER_DATA',
-  payload: data
-} as const);
-
-export const setWeatherForecastData = (data: ForecastWeatherType[]) => ({
-  type: 'OPEN_WEATHER/SET_FORECAST_WEATHER_DATA',
-  payload: data
+export const setWeatherData = (current: CurrentWeatherType, forecast: ForecastWeatherType[]) => ({
+  type: 'OPEN_WEATHER/SET_WEATHER_DATA',
+  payload: {
+    current,
+    forecast
+  }
 } as const);
 
 export const setInitialize = (value: boolean) => ({
@@ -20,20 +18,30 @@ export const setInitialize = (value: boolean) => ({
   payload: value
 } as const);
 
+export const setApiName = (apiName: string) => ({
+  type: 'APP/SET_API_NAME',
+  payload: apiName
+} as const);
+
 export const setAppError = (error: string) => ({
   type: 'APP/SET_ERROR',
   payload: error
 } as const);
 
-export const setWeatherDataBasic = () => ({
+export const setOpenWeatherDataBasic = () => ({
   type: 'LOAD_WEATHER_DATA_BASIC',
 } as const);
 
-export const setWeatherDataCity = (city: string) => ({
+export const setOpenWeatherDataCity = (city: string) => ({
   type: 'LOAD_WEATHER_DATA_CITY',
   payload: city
 } as const);
 
-export const setRapidDataBasic = () => ({
+export const setRapidWeatherDataBasic = () => ({
   type: 'LOAD_RAPID_DATA_BASIC',
+} as const);
+
+export const setRapidWeatherDataCity = (city: string) => ({
+  type: 'LOAD_RAPID_DATA_CITY',
+  payload: city
 } as const);

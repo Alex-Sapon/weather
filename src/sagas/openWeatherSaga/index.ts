@@ -1,14 +1,9 @@
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { call, debounce, fork, put, takeEvery } from 'redux-saga/effects';
 
 import { apiOpenWeather } from '@/api';
-import { getUserLocation } from '@/helpers';
-import {
-  setWeatherDataCity,
-  setInitialize,
-  setWeatherCurrentData,
-  setWeatherForecastData,
-} from '@/store/actions';
+import { getUserLocation, handleAppError } from '@/helpers';
+import { setOpenWeatherDataCity, setInitialize, setWeatherData } from '@/store/actions';
 import { CurrentWeather, ForecastWeather } from '@/types';
 
 function* loadCurrentData() {
@@ -22,10 +17,10 @@ function* loadCurrentData() {
 
   const forecast: AxiosResponse<ForecastWeather> = yield call(
     apiOpenWeather.fetchWeatherForecast,
-    weather.data.id
+    weather.data.id,
   );
 
-  yield put(setWeatherCurrentData({
+  yield put(setWeatherData({
     date: weather.data.dt,
     city: weather.data.name,
     description: weather.data.weather[0].description,
@@ -34,43 +29,49 @@ function* loadCurrentData() {
     temp: weather.data.main.temp,
     wind: weather.data.wind.speed,
     pressure: weather.data.main.pressure,
-  }));
-  yield put(setWeatherForecastData(forecast.data.list.map(data => ({
+  },
+  forecast.data.list.map(data => ({
     date: data.dt,
     temp: data.main.temp,
     icon: data.weather[0].icon,
     description: data.weather[0].description,
-  }))));
+  })),
+  ));
   yield put(setInitialize(true));
 }
 
-export function* loadOpenWeatherWithCity(action: ReturnType<typeof setWeatherDataCity>) {
-  const weather: AxiosResponse<CurrentWeather> = yield call(
-    apiOpenWeather.fetchWeatherCity,
-    action.payload,
-  );
+export function* loadOpenWeatherWithCity(action: ReturnType<typeof setOpenWeatherDataCity>) {
+  try {
+    const weather: AxiosResponse<CurrentWeather> = yield call(
+      apiOpenWeather.fetchWeatherCity,
+      action.payload,
+    );
 
-  const forecast: AxiosResponse<ForecastWeather> = yield call(
-    apiOpenWeather.fetchWeatherForecast,
-    weather.data.id
-  );
+    const forecast: AxiosResponse<ForecastWeather> = yield call(
+      apiOpenWeather.fetchWeatherForecast,
+      weather.data.id,
+    );
 
-  yield put(setWeatherCurrentData({
-    date: weather.data.dt,
-    city: weather.data.name,
-    description: weather.data.weather[0].description,
-    feelsLike: weather.data.main.feels_like,
-    icon: weather.data.weather[0].icon,
-    temp: weather.data.main.temp,
-    wind: weather.data.wind.speed,
-    pressure: weather.data.main.pressure,
-  }));
-  yield put(setWeatherForecastData(forecast.data.list.map(data => ({
-    date: data.dt,
-    temp: data.main.temp,
-    icon: data.weather[0].icon,
-    description: data.weather[0].description,
-  }))));
+    yield put(setWeatherData({
+      date: weather.data.dt,
+      city: weather.data.name,
+      description: weather.data.weather[0].description,
+      feelsLike: weather.data.main.feels_like,
+      icon: weather.data.weather[0].icon,
+      temp: weather.data.main.temp,
+      wind: weather.data.wind.speed,
+      pressure: weather.data.main.pressure,
+    },
+    forecast.data.list.map(data => ({
+      date: data.dt,
+      temp: data.main.temp,
+      icon: data.weather[0].icon,
+      description: data.weather[0].description,
+    })),
+    ));
+  } catch (error) {
+    yield handleAppError(error as AxiosError);
+  }
 }
 
 export function* watchOpenWeather() {

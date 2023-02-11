@@ -1,8 +1,9 @@
-import { changeTheme, setAppError, setInitialize } from '@/store/actions';
+import { changeTheme, setApiName, setAppError, setInitialize } from '@/store/actions';
 
 const initialState: StateType = {
   isInitialized: false,
   theme: 'light',
+  apiName: 'openWeather',
   error: ''
 };
 
@@ -12,6 +13,8 @@ export const appReducer = (state: StateType = initialState, action: ActionType):
     return { ...state, theme: action.payload };
   case 'APP/SET_INITIALISE':
     return { ...state, isInitialized: action.payload };
+  case 'APP/SET_API_NAME':
+    return { ...state, apiName: action.payload };
   case 'APP/SET_ERROR':
     return { ...state, error: action.payload };
   default:
@@ -22,10 +25,12 @@ export const appReducer = (state: StateType = initialState, action: ActionType):
 type StateType = {
   isInitialized: boolean
   theme: string
+  apiName: string
   error: string
 };
 
 type ActionType =
   | ReturnType<typeof changeTheme>
   | ReturnType<typeof setInitialize>
-  | ReturnType<typeof setAppError>;
+  | ReturnType<typeof setAppError>
+  | ReturnType<typeof setApiName>;

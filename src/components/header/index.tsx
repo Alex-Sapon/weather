@@ -7,7 +7,7 @@ import { Control, HeaderContainer, Input, Logo, ThemeButton } from './styles';
 import LogoApp from '@/assets/icons/logo.svg';
 import ThemeLogo from '@/assets/icons/theme_logo.svg';
 import { RadioGroup } from '@/components/radioGroup';
-import { changeTheme, setWeatherDataBasic, setWeatherDataCity } from '@/store/actions';
+import { changeTheme, setOpenWeatherDataBasic, setOpenWeatherDataCity } from '@/store/actions';
 import { selectAppTheme } from '@/store/selectors';
 
 export const Header = () => {
@@ -18,8 +18,8 @@ export const Header = () => {
   const onSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
 
-    if (value) dispatch(setWeatherDataCity(value));
-    else dispatch(setWeatherDataBasic());
+    if (value) dispatch(setOpenWeatherDataCity(value));
+    else dispatch(setOpenWeatherDataBasic());
   };
 
   const onChangeTheme = () => {

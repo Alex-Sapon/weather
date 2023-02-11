@@ -4,7 +4,7 @@ const options = (city: string, lat?: number, lon?: number) => ({
   method: 'GET',
   url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
   params: {
-    q: city ?? `${lat},${lon}`,
+    q: city || `${lat},${lon}`,
     days: '4',
     lang: 'ru',
   },
