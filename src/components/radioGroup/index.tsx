@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, RadioInput, Span } from './styles';
 
-import { setApiName, setOpenWeatherDataBasic, setRapidWeatherDataBasic } from '@/store/actions';
+import { setApiName, setWeatherDataBasic } from '@/store/actions';
 import { selectApiName } from '@/store/selectors';
 
 export const RadioGroup = () => {
@@ -12,19 +12,18 @@ export const RadioGroup = () => {
 
   const apiName = useSelector(selectApiName);
 
-  const onChangeApi = (event: ChangeEvent) => {
+  const onChangeApi = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(setApiName(event.target.id));
   };
 
   useEffect(() => {
-    if (apiName === 'rapidWeather') dispatch(setRapidWeatherDataBasic());
-    if (apiName === 'openWeather') dispatch(setOpenWeatherDataBasic());
+    dispatch(setWeatherDataBasic());
   }, [apiName]);
   
   return (
     <Container>
       <Span>
-        <RadioInput 
+        <RadioInput
           onChange={onChangeApi} 
           type="radio" 
           id="openWeather"

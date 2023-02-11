@@ -2,11 +2,10 @@ import { AxiosError } from 'axios';
 import { all, call, spawn } from 'redux-saga/effects';
 
 import { handleAppError } from '@/helpers';
-import { watchOpenWeather } from '@/sagas/openWeatherSaga';
-import { stormGlassWatcher } from '@/sagas/rapidSaga';
+import { watchOpenWeather } from '@/sagas/weatherSaga';
 
 export function* rootWatcher() {
-  const sagas = [watchOpenWeather, stormGlassWatcher];
+  const sagas = [watchOpenWeather];
 
   const retrySagas = sagas.map(saga => spawn(function* () {
     while (true) {

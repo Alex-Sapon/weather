@@ -1,4 +1,4 @@
-import { setOpenWeatherDataCity, setWeatherData } from '@/store/actions';
+import { setWeatherDataCity, setWeatherData } from '@/store/actions';
 import { ForecastWeatherType, CurrentWeatherType } from '@/types';
 
 const initialState = {
@@ -26,4 +26,4 @@ type StateType = {
 
 type ActionType =
   | ReturnType<typeof setWeatherData>
-  | ReturnType<typeof setOpenWeatherDataCity>;
+  | ReturnType<typeof setWeatherDataCity>;
