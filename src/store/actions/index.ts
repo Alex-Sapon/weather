@@ -20,8 +20,13 @@ export const setAppError = (error: string) => ({
   payload: error
 } as const);
 
+export const setCityName = (cityName: string) => ({
+  type: 'WEATHER/SET_CITY_NAME',
+  payload: cityName
+} as const);
+
 export const setWeatherData = (current: CurrentWeatherType, forecast: ForecastWeatherType[]) => ({
-  type: 'OPEN_WEATHER/SET_WEATHER_DATA',
+  type: 'WEATHER/SET_WEATHER_DATA',
   payload: {
     current,
     forecast
@@ -35,4 +40,8 @@ export const setWeatherDataBasic = () => ({
 export const setWeatherDataCity = (city: string) => ({
   type: 'LOAD_WEATHER_DATA_CITY',
   payload: city
+} as const);
+
+export const toggleWeatherApi = () => ({
+  type: 'TOGGLE_WEATHER_API'
 } as const);

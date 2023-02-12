@@ -2,6 +2,7 @@ import { changeTheme, setApiName, setAppError, setInitialize } from '@/store/act
 
 const initialState: StateType = {
   isInitialized: false,
+  isLoading: false,
   theme: 'light',
   apiName: 'openWeather',
   error: ''
@@ -24,6 +25,7 @@ export const appReducer = (state: StateType = initialState, action: ActionType):
 
 type StateType = {
   isInitialized: boolean
+  isLoading: boolean
   theme: string
   apiName: string
   error: string
