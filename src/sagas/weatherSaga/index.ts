@@ -1,22 +1,22 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { call, debounce, fork, put, select, takeEvery } from 'redux-saga/effects';
 
-import { apiOpenWeather, apiRapid } from '@/api';
-import { RapidWeather } from '@/api/rapid';
+import { apiOpenWeather, apiRapid, RapidWeather } from '@/api';
 import { getUserLocation, handleAppError } from '@/helpers';
+import { VisitorData } from '@/helpers/getUserLocation';
 import { setInitialize, setWeatherData, setWeatherDataBasic, setWeatherDataCity } from '@/store/actions';
 import { CurrentWeather, ForecastWeather } from '@/types';
 
 function* loadWeatherDataBasic() {
   try {
-    const location: GeolocationPosition = yield call(getUserLocation);
+    const location: VisitorData = yield call(getUserLocation);
     const apiName: string = yield select(state => state.appReducer.apiName);
 
     if (apiName === 'openWeather') {
       const weather: AxiosResponse<CurrentWeather> = yield call(
         apiOpenWeather.fetchWeatherCurrent,
-        location.coords.latitude,
-        location.coords.longitude,
+        Number(location.cityLatLong.split(',')[0]),
+        Number(location.cityLatLong.split(',')[1]),
       );
 
       const forecast: AxiosResponse<ForecastWeather> = yield call(
@@ -46,8 +46,8 @@ function* loadWeatherDataBasic() {
     if (apiName === 'rapidWeather') {
       const weather: AxiosResponse<RapidWeather> = yield call(
         apiRapid.fetchWeather,
-        location.coords.latitude,
-        location.coords.longitude,
+        Number(location.cityLatLong.split(',')[0]),
+        Number(location.cityLatLong.split(',')[1]),
       );
 
       yield put(setWeatherData({
@@ -67,8 +67,8 @@ function* loadWeatherDataBasic() {
         description: data.day.condition.text,
       }))
       ));
-    } 
-    
+    }
+
     yield put(setInitialize(true));
   } catch (error) {
     yield handleAppError(error as AxiosError);
@@ -138,7 +138,7 @@ function* loadWeatherDataCity(action: ReturnType<typeof setWeatherDataCity>) {
   }
 }
 
-function* toggleWeatherApi() {
+function* toggleFromBasicToCityApi() {
   const cityName: string = yield select(state => state.weatherReducer.cityName);
 
   if (cityName) {
@@ -150,7 +150,7 @@ function* toggleWeatherApi() {
 
 export function* watchOpenWeather() {
   yield fork(loadWeatherDataBasic);
-  yield takeEvery('TOGGLE_WEATHER_API', toggleWeatherApi);
+  yield takeEvery('TOGGLE_WEATHER_API', toggleFromBasicToCityApi);
   yield takeEvery('LOAD_WEATHER_DATA_BASIC', loadWeatherDataBasic);
   yield debounce(600, 'LOAD_WEATHER_DATA_CITY', loadWeatherDataCity);
 }
