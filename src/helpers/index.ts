@@ -4,3 +4,4 @@ export { convertUnixTimeToDate } from './convertUnixTimeToDate';
 export { handleAppError } from './handleAppError';
 export { convertAndSetOpenWeatherData } from './convertAndSetOpenWeatherData';
 export { convertAndSetRapidWeatherData } from './convertAndSetRapidWeatherData';
+export { fetchWeatherCurrentWithCache, fetchWeatherForecastWithCache } from './fetchWithCache';
