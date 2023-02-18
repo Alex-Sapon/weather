@@ -1,4 +1,4 @@
-export { apiOpenWeather } from './openweather';
-export { apiRapid } from './rapid';
-export type { RapidWeather } from './rapid';
+export { apiOpenWeather } from './openWeather';
+export { apiRapid } from './rapidWeather';
+export type { RapidWeather } from './rapidWeather';
 
