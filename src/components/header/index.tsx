@@ -17,7 +17,7 @@ export const Header = () => {
   const cityName = useSelector(selectCityName);
 
   const onSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setCityName(event.currentTarget.value));
+    dispatch(setCityName(event.currentTarget.value.toLowerCase()));
   };
 
   const onChangeTheme = () => {

@@ -37,9 +37,9 @@ export const setWeatherDataBasic = () => ({
   type: 'LOAD_WEATHER_DATA_BASIC',
 } as const);
 
-export const setWeatherDataCity = (city: string) => ({
+export const setWeatherDataCity = (cityName: string) => ({
   type: 'LOAD_WEATHER_DATA_CITY',
-  payload: city
+  payload: cityName
 } as const);
 
 export const toggleWeatherApi = () => ({

@@ -1,4 +1,4 @@
-import { apiOpenWeather } from '@/api';
+import { apiOpenWeather, apiRapid } from '@/api';
 import { cacheTimeMs } from '@/constants';
 
 type CacheType = {
@@ -12,32 +12,42 @@ let cacheTimer = 0;
 
 const getCacheTimer = (time: number) => {
   const now = new Date().getTime();
+
   if (cacheTimeMs < now + time) {
     cacheTimer = now + time;
   }
   return cacheTimer;
 };
 
-export const fetchWeatherCurrentWithCache = async (lat: number, lon: number, time: number) => {
+export const fetchWeatherWithCache = async (lat: number, lon: number, time: number, apiName: string) => {
   const now = new Date().getTime();
 
-  const key = `${lat}_${lon}`;
+  const key = `${lat}_${lon}_${apiName}`;
 
   if (!cache[key] || cache[key].cacheTimer < now) {
-    cache[key] = {
-      ...await apiOpenWeather.fetchWeatherCurrent(lat, lon),
-      cacheTimer: getCacheTimer(time)
-    };
+    if (apiName === 'openWeather') {
+      cache[key] = {
+        ...await apiOpenWeather.fetchCurrentWeather(lat, lon),
+        cacheTimer: getCacheTimer(time)
+      };
+    }
+
+    if (apiName === 'rapidWeather') {
+      cache[key] = {
+        ...await apiRapid.fetchWeather(lat, lon),
+        cacheTimer: getCacheTimer(time)
+      };
+    }
   }
   return cache[key];
 };
 
-export const fetchWeatherForecastWithCache = async (cityId: number, time: number) => {
+export const fetchForecastWeatherWithCache = async (cityId: number, time: number) => {
   const now = new Date().getTime();
 
   if (!cache[cityId] || cache[cityId].cacheTimer < now) {
     cache[cityId] = {
-      ...await apiOpenWeather.fetchWeatherForecast(cityId),
+      ...await apiOpenWeather.fetchForecastWeather(cityId),
       cacheTimer: getCacheTimer(time)
     };
   }

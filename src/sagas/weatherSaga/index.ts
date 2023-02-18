@@ -8,8 +8,8 @@ import {
   convertAndSetRapidWeatherData,
   getUserLocation,
   handleAppError,
-  fetchWeatherForecastWithCache,
-  fetchWeatherCurrentWithCache
+  fetchForecastWeatherWithCache,
+  fetchWeatherWithCache
 } from '@/helpers';
 import { VisitorData } from '@/helpers/getUserLocation';
 import { setInitialize, setWeatherDataBasic, setWeatherDataCity } from '@/store/actions';
@@ -22,26 +22,29 @@ function* loadWeatherDataBasic() {
 
     if (apiName === 'openWeather') {
       const weather: AxiosResponse<CurrentWeather> = yield call(
-        fetchWeatherCurrentWithCache,
+        fetchWeatherWithCache,
         Number(location.cityLatLong.split(',')[0]),
         Number(location.cityLatLong.split(',')[1]),
-        cacheTimeMs
+        cacheTimeMs,
+        apiName
       );
 
       const forecast: AxiosResponse<ForecastWeather> = yield call(
-        fetchWeatherForecastWithCache,
+        fetchForecastWeatherWithCache,
         weather.data.id,
         cacheTimeMs
       );
-      
+
       yield put(convertAndSetOpenWeatherData(weather.data, forecast.data));
     }
     
     if (apiName === 'rapidWeather') {
       const weather: AxiosResponse<RapidWeather> = yield call(
-        apiRapid.fetchWeather,
+        fetchWeatherWithCache,
         Number(location.cityLatLong.split(',')[0]),
         Number(location.cityLatLong.split(',')[1]),
+        cacheTimeMs,
+        apiName
       );
 
       yield put(convertAndSetRapidWeatherData(weather.data));
@@ -59,12 +62,12 @@ function* loadWeatherDataCity(action: ReturnType<typeof setWeatherDataCity>) {
 
     if (apiName === 'openWeather') {
       const weather: AxiosResponse<CurrentWeather> = yield call(
-        apiOpenWeather.fetchWeatherCity,
+        apiOpenWeather.fetchCityWeather,
         action.payload,
       );
 
       const forecast: AxiosResponse<ForecastWeather> = yield call(
-        apiOpenWeather.fetchWeatherForecast,
+        apiOpenWeather.fetchForecastWeather,
         weather.data.id,
       );
       

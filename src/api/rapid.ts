@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 const options = (city: string, lat?: number, lon?: number) => ({
   method: 'GET',
@@ -15,10 +15,10 @@ const options = (city: string, lat?: number, lon?: number) => ({
 });
 
 export const apiRapid = {
-  fetchWeather(lat: number, lon: number): Promise<AxiosResponse<RapidWeather>> {
+  fetchWeather(lat: number, lon: number): Promise<RapidWeather> {
     return axios.request(options('', lat, lon));
   },
-  fetchWeatherWithCity(city: string): Promise<AxiosResponse<RapidWeather>> {
+  fetchWeatherWithCity(city: string): Promise<RapidWeather> {
     return axios.request(options(city));
   },
 };
