@@ -12,7 +12,7 @@ module.exports = {
       '@/sagas': resolvePath('./src/sagas'),
       '@/api': resolvePath('./src/api'),
       '@/hooks': resolvePath('./src/hooks'),
-      '@/helpers': resolvePath('./src/helpers'),
+      '@/utils': resolvePath('./src/utils'),
       '@/constants': resolvePath('./src/constants'),
       '@/types': resolvePath('./src/actionTypes'),
     }

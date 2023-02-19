@@ -1,5 +1,5 @@
-import { setWeatherDataCity, setWeatherData, setCityName } from '@/store/actions';
-import { ForecastWeatherType, CurrentWeatherType } from '@/types';
+import { ActionType, WeatherStateType } from '@/store/types';
+import { CurrentWeatherType, ForecastWeatherType } from '@/types';
 
 const initialState = {
   currentWeather: {} as CurrentWeatherType,
@@ -7,7 +7,7 @@ const initialState = {
   cityName: '',
 };
 
-export const weatherReducer = (state: StateType = initialState, action: ActionType): StateType => {
+export const weatherReducer = (state: WeatherStateType = initialState, action: ActionType): WeatherStateType => {
   switch (action.type) {
   case 'WEATHER/SET_WEATHER_DATA':
     return {
@@ -21,14 +21,3 @@ export const weatherReducer = (state: StateType = initialState, action: ActionTy
     return state;
   }
 };
-
-type StateType = {
-  currentWeather: CurrentWeatherType
-  forecastWeather: ForecastWeatherType[]
-  cityName: string
-}
-
-type ActionType =
-  | ReturnType<typeof setWeatherData>
-  | ReturnType<typeof setWeatherDataCity>
-  | ReturnType<typeof setCityName>;

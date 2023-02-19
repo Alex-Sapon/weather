@@ -20,10 +20,10 @@ const getCacheTimer = (time: number) => {
 };
 
 export const fetchWeatherWithCache = async (
-  time: number, 
-  apiName: string, 
-  cityName: string, 
-  lat?: number, 
+  cityName: string,
+  apiName: string,
+  time: number,
+  lat?: number,
   lon?: number
 ) => {
   const now = new Date().getTime();

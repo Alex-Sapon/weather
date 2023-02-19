@@ -3,6 +3,8 @@ import { call, debounce, fork, put, select, takeEvery } from 'redux-saga/effects
 
 import { RapidWeather } from '@/api';
 import { cacheTimeMs } from '@/constants';
+import { setInitialize, setWeatherDataBasic, setWeatherDataCity } from '@/store/actions';
+import { CurrentWeather, ForecastWeather } from '@/types';
 import {
   convertAndSetOpenWeatherData,
   convertAndSetRapidWeatherData,
@@ -10,10 +12,8 @@ import {
   fetchWeatherWithCache,
   getUserLocation,
   handleAppError,
-} from '@/helpers';
-import { VisitorData } from '@/helpers/getUserLocation';
-import { setInitialize, setWeatherDataBasic, setWeatherDataCity } from '@/store/actions';
-import { CurrentWeather, ForecastWeather } from '@/types';
+} from '@/utils';
+import { VisitorData } from '@/utils/getUserLocation';
 
 function* loadWeatherDataBasic() {
   try {
@@ -23,9 +23,9 @@ function* loadWeatherDataBasic() {
     if (apiName === 'openWeather') {
       const weather: AxiosResponse<CurrentWeather> = yield call(
         fetchWeatherWithCache,
-        cacheTimeMs,
-        apiName,
         '',
+        apiName,
+        cacheTimeMs,
         Number(location.cityLatLong.split(',')[0]),
         Number(location.cityLatLong.split(',')[1])
       );
@@ -43,9 +43,9 @@ function* loadWeatherDataBasic() {
     if (apiName === 'rapidWeather') {
       const weather: AxiosResponse<RapidWeather> = yield call(
         fetchWeatherWithCache,
-        cacheTimeMs,
-        apiName,
         '',
+        apiName,
+        cacheTimeMs,
         Number(location.cityLatLong.split(',')[0]),
         Number(location.cityLatLong.split(',')[1])
       );
@@ -66,9 +66,9 @@ function* loadWeatherDataCity(action: ReturnType<typeof setWeatherDataCity>) {
     if (apiName === 'openWeather') {
       const weather: AxiosResponse<CurrentWeather> = yield call(
         fetchWeatherWithCache,
-        cacheTimeMs,
-        apiName,
         action.payload,
+        apiName,
+        cacheTimeMs,
       );
 
       const forecast: AxiosResponse<ForecastWeather> = yield call(
@@ -84,9 +84,9 @@ function* loadWeatherDataCity(action: ReturnType<typeof setWeatherDataCity>) {
     if (apiName === 'rapidWeather') {
       const weather: AxiosResponse<RapidWeather> = yield call(
         fetchWeatherWithCache,
-        cacheTimeMs,
-        apiName,
         action.payload,
+        apiName,
+        cacheTimeMs,
       );
 
       yield put(convertAndSetRapidWeatherData(weather.data));

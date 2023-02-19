@@ -11,8 +11,8 @@ import {
   LeftSideCity,
 } from './styles';
 
-import { getIconUrl } from '@/helpers';
 import { selectCurrentIcon, selectCurrentCity, selectCurrentTemp } from '@/store/selectors';
+import { getIconUrl } from '@/utils';
 
 export const LeftSideInfo = () => {
   const temp = useSelector(selectCurrentTemp);

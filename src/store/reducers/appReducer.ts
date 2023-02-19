@@ -1,6 +1,6 @@
-import { changeTheme, setApiName, setAppError, setInitialize } from '@/store/actions';
+import { ActionType, AppStateType } from '@/store/types';
 
-const initialState: StateType = {
+const initialState: AppStateType = {
   isInitialized: false,
   isLoading: false,
   theme: 'light',
@@ -8,7 +8,7 @@ const initialState: StateType = {
   error: ''
 };
 
-export const appReducer = (state: StateType = initialState, action: ActionType): StateType => {
+export const appReducer = (state: AppStateType = initialState, action: ActionType): AppStateType => {
   switch (action.type) {
   case 'APP/CHANGE-APP-THEME':
     return { ...state, theme: action.payload };
@@ -22,17 +22,3 @@ export const appReducer = (state: StateType = initialState, action: ActionType):
     return state;
   }
 };
-
-type StateType = {
-  isInitialized: boolean
-  isLoading: boolean
-  theme: string
-  apiName: string
-  error: string
-};
-
-type ActionType =
-  | ReturnType<typeof changeTheme>
-  | ReturnType<typeof setInitialize>
-  | ReturnType<typeof setAppError>
-  | ReturnType<typeof setApiName>;

@@ -1,4 +1,6 @@
-import { RootState } from '@/store';
+import { store } from '@/store';
+
+export type RootState = ReturnType<typeof store.getState>;
 
 export const selectAppTheme = (state: RootState) => state.appReducer.theme;
 export const selectIsInitialized = (state: RootState) => state.appReducer.isInitialized;
