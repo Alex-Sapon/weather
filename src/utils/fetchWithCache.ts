@@ -1,5 +1,6 @@
 import { apiOpenWeather, apiRapid } from '@/api';
 import { cacheTimeMs } from '@/constants';
+import { loadState, saveState } from '@/utils/localStorage';
 
 type CacheType = {
   [key: string]: {
@@ -7,7 +8,7 @@ type CacheType = {
   }
 }
 
-const cache: CacheType = {};
+const cache: CacheType = loadState() || {};
 let cacheTimer = 0;
 
 const getCacheTimer = (time: number) => {
@@ -60,6 +61,8 @@ export const fetchWeatherWithCache = async (
     }
   }
 
+  saveState(cache);
+
   return cache[key];
 };
 
@@ -74,6 +77,8 @@ export const fetchForecastWeatherWithCache = async (cityId: number,  apiName: st
       cacheTimer: getCacheTimer(time)
     };
   }
+
+  saveState(cache);
 
   return cache[key];
 };

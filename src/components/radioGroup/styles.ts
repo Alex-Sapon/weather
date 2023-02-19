@@ -49,7 +49,7 @@ export const RadioInput = styled.input`
     content: '';
     width: 12px;
     height: 12px;
-    background: #F87DA9;
+    background: ${props => props.theme.color.textTertiary};
     position: absolute;
     top: 4px;
     left: 4px;

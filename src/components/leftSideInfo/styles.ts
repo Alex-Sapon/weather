@@ -31,9 +31,9 @@ export const LeftSideTemperature = styled.div`
 `;
 
 export const LeftSideDay = styled.div`
-  color: ${props => props.theme.color.textPrimary};
   font-weight: 500;
   font-size: 32px;
+  color: ${props => props.theme.color.textPrimary};
   grid-area: 2 / 1 / 3 / 2;
 
   @media (max-width: 479.98px) {

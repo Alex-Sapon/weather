@@ -3,7 +3,6 @@ import createSagaMiddleware from 'redux-saga';
 
 import { rootWatcher } from '@/sagas/rootSaga';
 import { appReducer, weatherReducer } from '@/store/reducers';
-import { loadState, saveState } from '@/utils/localStorage';
 
 const rootReducer = combineReducers({
   appReducer,
@@ -16,10 +15,7 @@ const composeEnhancers = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_C
 
 export const store = createStore(
   rootReducer,
-  loadState(),
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
 sagaMiddleware.run(rootWatcher);
-
-store.subscribe(() => saveState(store.getState()));
