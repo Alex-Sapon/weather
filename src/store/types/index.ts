@@ -1,3 +1,4 @@
+import { CurrentWeatherType, ForecastWeatherType } from '@/api/types';
 import {
   changeTheme,
   setApiName,
@@ -7,7 +8,6 @@ import {
   setWeatherData,
   setWeatherDataCity,
 } from '@/store/actions';
-import { CurrentWeatherType, ForecastWeatherType } from '@/types';
 
 export type AppStateType = {
   isInitialized: boolean

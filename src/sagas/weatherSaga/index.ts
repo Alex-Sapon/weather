@@ -1,23 +1,24 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { call, debounce, fork, put, select, takeEvery } from 'redux-saga/effects';
 
-import { RapidWeather } from '@/api';
+import { CurrentWeather, ForecastWeather, IpAPI, RapidWeather } from '@/api/types';
 import { cacheTimeMs } from '@/constants';
 import { setInitialize, setWeatherDataBasic, setWeatherDataCity } from '@/store/actions';
-import { CurrentWeather, ForecastWeather } from '@/types';
 import {
   convertAndSetOpenWeatherData,
   convertAndSetRapidWeatherData,
   fetchForecastWeatherWithCache,
   fetchWeatherWithCache,
-  getUserLocation,
   handleAppError,
 } from '@/utils';
-import { VisitorData } from '@/utils/getUserLocation';
+import { fetchUserLocationWithCache } from '@/utils/fetchWithCache';
 
 function* loadWeatherDataBasic() {
   try {
-    const location: VisitorData = yield call(getUserLocation);
+    const location: AxiosResponse<IpAPI> = yield call(
+      fetchUserLocationWithCache,
+      cacheTimeMs
+    );
     const apiName: string = yield select(state => state.appReducer.apiName);
 
     if (apiName === 'openWeather') {
@@ -26,8 +27,8 @@ function* loadWeatherDataBasic() {
         '',
         apiName,
         cacheTimeMs,
-        Number(location.cityLatLong.split(',')[0]),
-        Number(location.cityLatLong.split(',')[1])
+        location.data.lat,
+        location.data.lon
       );
 
       const forecast: AxiosResponse<ForecastWeather> = yield call(
@@ -46,8 +47,8 @@ function* loadWeatherDataBasic() {
         '',
         apiName,
         cacheTimeMs,
-        Number(location.cityLatLong.split(',')[0]),
-        Number(location.cityLatLong.split(',')[1])
+        location.data.lat,
+        location.data.lon
       );
 
       yield put(convertAndSetRapidWeatherData(weather.data));

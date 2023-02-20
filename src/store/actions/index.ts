@@ -1,4 +1,4 @@
-import { CurrentWeatherType, ForecastWeatherType } from '@/types';
+import { CurrentWeatherType, ForecastWeatherType } from '@/api/types';
 
 export const changeTheme = (value: string) => ({
   type: 'APP/CHANGE-APP-THEME',

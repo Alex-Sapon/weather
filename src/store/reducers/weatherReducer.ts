@@ -1,5 +1,5 @@
+import { CurrentWeatherType, ForecastWeatherType } from '@/api/types';
 import { ActionType, WeatherStateType } from '@/store/types';
-import { CurrentWeatherType, ForecastWeatherType } from '@/types';
 
 const initialState = {
   currentWeather: {} as CurrentWeatherType,

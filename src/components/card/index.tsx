@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CardContainer, CardImage, CardTextBold, CardTextLight } from './styles';
 
-import { ForecastWeatherType } from '@/types';
+import { ForecastWeatherType } from '@/api/types';
 import { getIconUrl, convertUnixTimeToDate } from '@/utils';
 
 export const Card = ({ temp, description, date, icon }: ForecastWeatherType) => (
