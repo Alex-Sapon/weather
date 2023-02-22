@@ -1,4 +1,4 @@
-import { apiOpenWeather, apiRapid, apiAPI } from '@/api';
+import { apiOpenWeather, apiRapid, ipAPI } from '@/api';
 import { cacheTimeMs } from '@/constants';
 import { loadState, saveState } from '@/utils/localStorage';
 
@@ -17,6 +17,7 @@ const getCacheTimer = (time: number) => {
   if (cacheTimeMs < now + time) {
     cacheTimer = now + time;
   }
+
   return cacheTimer;
 };
 
@@ -90,7 +91,7 @@ export const fetchUserLocationWithCache = async (time: number) => {
 
   if (!cache[key] || cache[key].cacheTimer < now) {
     cache[key] = {
-      ...await apiAPI.getUserLocation(),
+      ...await ipAPI.getUserLocation(),
       cacheTimer: getCacheTimer(time)
     };
   }
