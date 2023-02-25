@@ -21,42 +21,27 @@ const getCacheTimer = (time: number) => {
   return cacheTimer;
 };
 
-export const fetchWeatherWithCache = async (
-  cityName: string,
+export const fetchCoordinatesWeatherWithCache = async (
+  lat: number,
+  lon: number,
   apiName: string,
   time: number,
-  lat?: number,
-  lon?: number
 ) => {
   const now = new Date().getTime();
 
-  const key = cityName ? `${cityName}_${apiName}` : `${lat}_${lon}_${apiName}`;
+  const key = `${lat}_${lon}_${apiName}`;
 
   if (!cache[key] || cache[key].cacheTimer < now) {
-    if (apiName === 'openWeather' && lat && lon) {
+    if (apiName === 'openWeather') {
       cache[key] = {
         ...await apiOpenWeather.fetchCurrentWeather(lat, lon),
         cacheTimer: getCacheTimer(time)
       };
     }
 
-    if (apiName === 'openWeather' && cityName) {
-      cache[key] = {
-        ...await apiOpenWeather.fetchCityWeather(cityName),
-        cacheTimer: getCacheTimer(time)
-      };
-    }
-
-    if (apiName === 'rapidWeather' && lat && lon) {
+    if (apiName === 'rapidWeather') {
       cache[key] = {
         ...await apiRapid.fetchWeather(lat, lon),
-        cacheTimer: getCacheTimer(time)
-      };
-    }
-
-    if (apiName === 'rapidWeather' && cityName) {
-      cache[key] = {
-        ...await apiRapid.fetchWeatherWithCity(cityName),
         cacheTimer: getCacheTimer(time)
       };
     }
@@ -67,14 +52,50 @@ export const fetchWeatherWithCache = async (
   return cache[key];
 };
 
-export const fetchForecastWeatherWithCache = async (cityId: number,  apiName: string, time: number) => {
+export const fetchCityWeatherWithCache = async (
+  cityName: string,
+  apiName: string,
+  time: number,
+  signal: AbortSignal,
+) => {
+  const now = new Date().getTime();
+
+  const key = `${cityName}_${apiName}`;
+
+  if (!cache[key] || cache[key].cacheTimer < now) {
+    if (apiName === 'openWeather') {
+      cache[key] = {
+        ...await apiOpenWeather.fetchCityWeather(cityName, signal),
+        cacheTimer: getCacheTimer(time)
+      };
+    }
+
+    if (apiName === 'rapidWeather') {
+      cache[key] = {
+        ...await apiRapid.fetchWeatherWithCity(cityName, signal),
+        cacheTimer: getCacheTimer(time)
+      };
+    }
+  }
+
+  saveState(cache);
+
+  return cache[key];
+};
+
+export const fetchForecastWeatherWithCache = async (
+  cityId: number,
+  apiName: string,
+  time: number,
+  signal: AbortSignal
+) => {
   const now = new Date().getTime();
 
   const key = `${cityId}_${apiName}`;
 
   if (!cache[key] || cache[key].cacheTimer < now) {
     cache[key] = {
-      ...await apiOpenWeather.fetchForecastWeather(cityId),
+      ...await apiOpenWeather.fetchForecastWeather(cityId, signal),
       cacheTimer: getCacheTimer(time)
     };
   }

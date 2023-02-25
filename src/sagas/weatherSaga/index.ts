@@ -1,14 +1,15 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { call, debounce, fork, put, select, takeEvery } from 'redux-saga/effects';
 
-import { CurrentWeather, ForecastWeather, IpAPI, RapidWeather } from '@/api/types';
+import { CurrentWeather, ForecastWeather, IpAPI, RapidWeather } from '@/api/interfaces';
 import { cacheTimeMs } from '@/constants';
 import { setInitialize, setWeatherDataBasic, setWeatherDataCity } from '@/store/actions';
 import {
   convertAndSetOpenWeatherData,
   convertAndSetRapidWeatherData,
   fetchForecastWeatherWithCache,
-  fetchWeatherWithCache,
+  fetchCityWeatherWithCache,
+  fetchCoordinatesWeatherWithCache,
   handleAppError,
 } from '@/utils';
 import { fetchUserLocationWithCache } from '@/utils/fetchWithCache';
@@ -23,19 +24,19 @@ function* loadWeatherDataBasic() {
 
     if (apiName === 'openWeather') {
       const weather: AxiosResponse<CurrentWeather> = yield call(
-        fetchWeatherWithCache,
-        '',
+        fetchCoordinatesWeatherWithCache,
+        location.data.lat,
+        location.data.lon,
         apiName,
         cacheTimeMs,
-        location.data.lat,
-        location.data.lon
       );
 
       const forecast: AxiosResponse<ForecastWeather> = yield call(
         fetchForecastWeatherWithCache,
         weather.data.id,
         apiName,
-        cacheTimeMs
+        cacheTimeMs,
+        new AbortController().signal
       );
 
       yield put(convertAndSetOpenWeatherData(weather.data, forecast.data));
@@ -43,12 +44,11 @@ function* loadWeatherDataBasic() {
     
     if (apiName === 'rapidWeather') {
       const weather: AxiosResponse<RapidWeather> = yield call(
-        fetchWeatherWithCache,
-        '',
+        fetchCoordinatesWeatherWithCache,
+        location.data.lat,
+        location.data.lon,
         apiName,
         cacheTimeMs,
-        location.data.lat,
-        location.data.lon
       );
 
       yield put(convertAndSetRapidWeatherData(weather.data));
@@ -61,15 +61,23 @@ function* loadWeatherDataBasic() {
 }
 
 function* loadWeatherDataCity(action: ReturnType<typeof setWeatherDataCity>) {
-  try {
-    const apiName: string = yield select(state => state.appReducer.apiName);
+  const apiName: string = yield select(state => state.appReducer.apiName);
+  const cityName: string = yield select(state => state.weatherReducer.cityName);
 
+  const abortController = new AbortController();
+
+  if (!cityName) {
+    abortController.abort();
+  }
+
+  try {
     if (apiName === 'openWeather') {
       const weather: AxiosResponse<CurrentWeather> = yield call(
-        fetchWeatherWithCache,
+        fetchCityWeatherWithCache,
         action.payload,
         apiName,
         cacheTimeMs,
+        abortController.signal
       );
 
       const forecast: AxiosResponse<ForecastWeather> = yield call(
@@ -77,6 +85,7 @@ function* loadWeatherDataCity(action: ReturnType<typeof setWeatherDataCity>) {
         weather.data.id,
         apiName,
         cacheTimeMs,
+        abortController.signal
       );
       
       yield put(convertAndSetOpenWeatherData(weather.data, forecast.data));
@@ -84,10 +93,11 @@ function* loadWeatherDataCity(action: ReturnType<typeof setWeatherDataCity>) {
 
     if (apiName === 'rapidWeather') {
       const weather: AxiosResponse<RapidWeather> = yield call(
-        fetchWeatherWithCache,
+        fetchCityWeatherWithCache,
         action.payload,
         apiName,
         cacheTimeMs,
+        abortController.signal
       );
 
       yield put(convertAndSetRapidWeatherData(weather.data));

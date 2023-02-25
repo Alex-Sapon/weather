@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { IpAPI } from '@/api/types';
+import { IpAPI } from '@/api/interfaces';
 
 export const ipAPI = {
   getUserLocation(): Promise<IpAPI> {

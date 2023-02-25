@@ -16,7 +16,7 @@ export interface IpAPI {
   query: string
 }
 
-// OpenWeatherCurrent
+// OpenWeather current weather
 export interface CurrentWeather {
   coordinates: Coordinates;
   weather: WeatherConditions[];
@@ -57,7 +57,7 @@ export interface WindInfo {
   gust: number;
 }
 
-// OpenWeatherForecast
+// OpenWeather forecast weather
 export interface ForecastWeather {
   cod: string;
   message: number;
@@ -73,7 +73,6 @@ export interface City {
   country: string;
 }
 
-// forecast weather
 export interface DayOfForecast {
   dt: number;
   main: Main;

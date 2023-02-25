@@ -1,4 +1,4 @@
-import { RapidWeather } from '@/api/types';
+import { RapidWeather } from '@/api/interfaces';
 import { setWeatherData } from '@/store/actions';
 
 export const convertAndSetRapidWeatherData = (weather: RapidWeather) => setWeatherData({

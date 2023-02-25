@@ -1,4 +1,4 @@
-import { CurrentWeatherType, ForecastWeatherType } from '@/api/types';
+import { CurrentWeatherType, ForecastWeatherType } from '@/api/interfaces';
 import { ActionType, WeatherStateType } from '@/store/types';
 
 const initialState = {

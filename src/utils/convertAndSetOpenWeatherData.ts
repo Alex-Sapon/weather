@@ -1,4 +1,4 @@
-import { CurrentWeather, ForecastWeather } from '@/api/types';
+import { CurrentWeather, ForecastWeather } from '@/api/interfaces';
 import { setWeatherData } from '@/store/actions';
 
 export const convertAndSetOpenWeatherData = (weather: CurrentWeather, forecast: ForecastWeather) => setWeatherData({

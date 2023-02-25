@@ -30,6 +30,6 @@ export const AlertBar = ({ error, onClose, seconds }: AlertBarProps) => {
         <AlertBarSubtitle>{error}</AlertBarSubtitle>
       </AlertBarContent>
     </AlertBarContainer>,
-    document.body,
+    document.getElementById('root') as Element,
   );
 };
