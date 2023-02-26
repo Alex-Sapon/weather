@@ -1,4 +1,4 @@
-# Hello, this is Weather app
+# Hello 👋, this is Weather app
 
 ## Technologies used
 
