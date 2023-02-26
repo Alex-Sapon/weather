@@ -2,11 +2,9 @@ import axios from 'axios';
 
 import { RapidWeather } from '@/api/interfaces';
 
-const BASE_URL = 'https://weatherapi-com.p.rapidapi.com/forecast.json';
-
 const basicOptions = {
   method: 'GET',
-  url: BASE_URL,
+  url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
   headers: {
     'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
     'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',

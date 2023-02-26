@@ -20,6 +20,7 @@ function* loadWeatherDataBasic() {
       fetchUserLocationWithCache,
       cacheTimeMs
     );
+
     const apiName: string = yield select(state => state.appReducer.apiName);
 
     if (apiName === 'openWeather') {

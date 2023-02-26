@@ -1,13 +1,13 @@
 import { ActionType, AppStateType } from '@/store/types';
 import { loadState } from '@/utils/localStorage';
 
-const cache = loadState().appReducer;
+const cache = loadState()?.appReducer;
 
 const initialState: AppStateType = {
   isInitialized: false,
   isLoading: false,
-  theme: cache.theme || 'light',
-  apiName: cache.apiName || 'openWeather',
+  theme: cache?.theme || 'light',
+  apiName: cache?.apiName || 'openWeather',
   error: ''
 };
 
