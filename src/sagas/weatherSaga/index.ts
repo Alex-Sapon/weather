@@ -1,22 +1,22 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { call, debounce, fork, put, select, takeEvery } from 'redux-saga/effects';
 
-import { CurrentWeather, ForecastWeather, IpAPI, RapidWeather } from '@/api/interfaces';
+import { CurrentWeather, ForecastWeather, RapidWeather } from '@/api/interfaces';
 import { cacheTimeMs } from '@/constants';
 import { setInitialize, setWeatherDataBasic, setWeatherDataCity } from '@/store/actions';
 import {
   convertAndSetOpenWeatherData,
   convertAndSetRapidWeatherData,
-  fetchForecastWeatherWithCache,
   fetchCityWeatherWithCache,
   fetchCoordinatesWeatherWithCache,
+  fetchForecastWeatherWithCache,
   handleAppError,
 } from '@/utils';
 import { fetchUserLocationWithCache } from '@/utils/fetchWithCache';
 
 function* loadWeatherDataBasic() {
   try {
-    const location: AxiosResponse<IpAPI> = yield call(
+    const location: GeolocationCoordinates = yield call(
       fetchUserLocationWithCache,
       cacheTimeMs
     );
@@ -26,8 +26,8 @@ function* loadWeatherDataBasic() {
     if (apiName === 'openWeather') {
       const weather: AxiosResponse<CurrentWeather> = yield call(
         fetchCoordinatesWeatherWithCache,
-        location.data.lat,
-        location.data.lon,
+        location.latitude,
+        location.longitude,
         apiName,
         cacheTimeMs,
       );
@@ -46,8 +46,8 @@ function* loadWeatherDataBasic() {
     if (apiName === 'rapidWeather') {
       const weather: AxiosResponse<RapidWeather> = yield call(
         fetchCoordinatesWeatherWithCache,
-        location.data.lat,
-        location.data.lon,
+        location.latitude,
+        location.longitude,
         apiName,
         cacheTimeMs,
       );
